@@ -1,0 +1,56 @@
+{
+  "uint16Le": [
+    {
+      "source": "0xabcd",
+      "expected": "0xcdab"
+    },
+    {
+      "source": "0x00cd",
+      "expected": "0xcd00"
+    },
+    {
+      "source": "0xab00",
+      "expected": "0x00ab"
+    },
+    {
+      "source": "0x0bc0",
+      "expected": "0xc00b"
+    },
+    {
+      "source": 6,
+      "exception": "Expect 6 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    }
+  ],
+  "uint32Le": [
+    {
+      "source": "0x12345678",
+      "expected": "0x78563412"
+    },
+    {
+      "source": 6,
+      "exception": "Expect 6 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    }
+  ],
+  "uint64Le": [
+    {
+      "source": "0x1234567890abcdef",
+      "expected": "0xefcdab9078563412"
+    },
+    {
+      "source": 6,
+      "exception": "Expect 6 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    }
+  ]
+}

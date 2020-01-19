@@ -8,5 +8,5 @@
   "quoteProps": "consistent",
   "bracketSpacing": true,
   "arrowParens": "avoid",
-  "endOfLine": "crlf"
+  "endOfLine": "auto"
 }

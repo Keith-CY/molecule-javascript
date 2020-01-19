@@ -2,9 +2,10 @@
   "env": {
     "browser": true,
     "es6": true,
-    "node": true
+    "node": true,
+    "jest": true
   },
-  "extends": ["airbnb-base", "plugin:prettier/recommended"],
+  "extends": ["airbnb-base", "plugin:import/typescript", "plugin:prettier/recommended"],
   "globals": {
     "Atomics": "readonly",
     "SharedArrayBuffer": "readonly"
@@ -15,5 +16,12 @@
     "sourceType": "module"
   },
   "plugins": ["@typescript-eslint"],
-  "rules": {}
+  "rules": {
+    "import/extensions": [
+      2, "ignorePackages", {
+        "js": "never",
+        "ts": "never"
+      }
+    ]
+  }
 }
