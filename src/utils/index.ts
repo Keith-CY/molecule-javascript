@@ -34,7 +34,10 @@ export const fromUintLe = (uintLe: string) => {
   if (raw.length % 2) {
     raw = `0${raw}`
   }
-  return `0x${(raw.match(/\w{1,2}/g) || []).reverse().join('')}`
+  return `0x${raw
+    .match(/\w{1,2}/g)!
+    .reverse()
+    .join('')}`
 }
 
 export default { uint16Le, uint32Le, uint64Le, fromUintLe }

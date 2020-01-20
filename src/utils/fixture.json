@@ -71,6 +71,10 @@
       "expected": "0x0bc0"
     },
     {
+      "source": "0xc0b",
+      "expected": "0x0b0c"
+    },
+    {
       "source": "0xefcdab9078563412",
       "expected": "0x1234567890abcdef"
     },

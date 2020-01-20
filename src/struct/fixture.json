@@ -1,0 +1,20 @@
+{
+  "serialize": [
+    {
+      "source": [
+        ["name", "0x01"],
+        ["name", "0x02"],
+        ["name", "0x03"]
+      ],
+      "expected": "0x010203"
+    },
+    {
+      "source": [
+        ["name", "01"],
+        ["name", "02"],
+        ["name", "03"]
+      ],
+      "exception": "Expect 01 to be a hex string"
+    }
+  ]
+}
