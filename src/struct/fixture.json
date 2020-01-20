@@ -16,5 +16,22 @@
       ],
       "exception": "Expect 01 to be a hex string"
     }
+  ],
+  "deserialize": [
+    {
+      "source": {
+        "serialized": "0x10203",
+        "sizes": [
+          ["name0", 2],
+          ["name1", 2],
+          ["name2", 2]
+        ]
+      },
+      "expected": [
+        ["name0", "0x01"],
+        ["name1", "0x02"],
+        ["name2", "0x03"]
+      ]
+    }
   ]
 }

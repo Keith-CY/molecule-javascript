@@ -1,7 +1,8 @@
 import { assertIsHexStr } from '../utils'
-import { serializeArray } from '../array'
+import { serializeArray, deserializeArray } from '../array'
 
 type StructElement = [string, string]
+type StructSize = [string, number]
 
 export const serializeStruct = (struct: StructElement[]) => {
   const values = struct.map(item => item[1])
@@ -9,4 +10,12 @@ export const serializeStruct = (struct: StructElement[]) => {
   return serializeArray(values)
 }
 
-export default { serializeStruct }
+export const deserializeStruct = (serialized: string, sizes: StructSize[]) => {
+  const deserialized = deserializeArray(
+    serialized,
+    sizes.map(structSize => structSize[1]),
+  )
+  return sizes.map((size, idx) => [size[0], deserialized[idx]])
+}
+
+export default { serializeStruct, deserializeStruct }
