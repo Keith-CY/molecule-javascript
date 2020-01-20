@@ -1,7 +1,5 @@
-export type HexString = string
-
 export function assertIsHexStr(str: any): asserts str is HexString {
-  if (typeof str !== 'string' || !str.startsWith('0x')) {
+  if (typeof str !== 'string' || !str.startsWith('0x') || Number.isNaN(+str)) {
     throw new TypeError(`Expect ${str} to be a hex string`)
   }
 }
@@ -30,4 +28,13 @@ export const uint64Le = (uint64: string) => {
   return `0x${viewRight}${viewLeft}`
 }
 
-export default { uint16Le, uint32Le, uint64Le }
+export const fromUintLe = (uintLe: string) => {
+  assertIsHexStr(uintLe)
+  let raw = uintLe.slice(2)
+  if (raw.length % 2) {
+    raw = `0${raw}`
+  }
+  return `0x${(raw.match(/\w{1,2}/g) || []).reverse().join('')}`
+}
+
+export default { uint16Le, uint32Le, uint64Le, fromUintLe }

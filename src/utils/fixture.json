@@ -23,6 +23,10 @@
     {
       "source": "ab",
       "exception": "Expect ab to be a hex string"
+    },
+    {
+      "source": "hi",
+      "exception": "Expect hi to be a hex string"
     }
   ],
   "uint32Le": [
@@ -37,6 +41,10 @@
     {
       "source": "ab",
       "exception": "Expect ab to be a hex string"
+    },
+    {
+      "source": "hi",
+      "exception": "Expect hi to be a hex string"
     }
   ],
   "uint64Le": [
@@ -51,6 +59,32 @@
     {
       "source": "ab",
       "exception": "Expect ab to be a hex string"
+    },
+    {
+      "source": "hi",
+      "exception": "Expect hi to be a hex string"
+    }
+  ],
+  "fromUintLe": [
+    {
+      "source": "0xc00b",
+      "expected": "0x0bc0"
+    },
+    {
+      "source": "0xefcdab9078563412",
+      "expected": "0x1234567890abcdef"
+    },
+    {
+      "source": 6,
+      "exception": "Expect 6 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    },
+    {
+      "source": "hi",
+      "exception": "Expect hi to be a hex string"
     }
   ]
 }
