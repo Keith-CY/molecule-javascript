@@ -5,8 +5,56 @@
       "expected": "0x010203"
     },
     {
+      "source": ["0x1", "0x2", "0x3"],
+      "expected": "0x010203"
+    },
+    {
       "source": ["01", "02", "03"],
       "exception": "Expect 01 to be a hex string"
+    }
+  ],
+  "deserialize": [
+    {
+      "source": {
+        "serialized": "0x010203",
+        "sizes": [2, 4]
+      },
+      "expected": ["0x01", "0x0203"]
+    },
+    {
+      "source": {
+        "serialized": "0x10203",
+        "sizes": [2, 4]
+      },
+      "expected": ["0x01", "0x0203"]
+    },
+    {
+      "source": {
+        "serialized": "0x010203",
+        "sizes": [2, 5]
+      },
+      "exception": "Size exceeds the serialized data"
+    },
+    {
+      "source": {
+        "serialized": "0x010203",
+        "sizes": []
+      },
+      "exception": "Expect sizes to be an array of size"
+    },
+    {
+      "source": {
+        "serialized": "0x010203",
+        "sizes": null
+      },
+      "exception": "Expect sizes to be an array of size"
+    },
+    {
+      "source": {
+        "serialized": "0x010203",
+        "sizes": ["2", 5]
+      },
+      "exception": "Expect size to be a number"
     }
   ]
 }
