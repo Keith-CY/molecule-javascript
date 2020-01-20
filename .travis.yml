@@ -1,0 +1,21 @@
+language: node_js
+sudo: true
+
+node_js:
+  - '10.15'
+  - '12.14'
+  - '13.6'
+
+cache:
+  - npm
+  - yarn
+
+install:
+  - travis_retry make ci-install
+
+script:
+  - npm run build
+  - npm run test
+
+after_success:
+  - codecov
