@@ -4,22 +4,22 @@ import { deserializeArray } from '../array'
 const Uint32Length = 4
 
 export const serializeTable = (origin: Array<TypeElement>): string => {
-  const values = origin.map(item => item[1])
+  let values = origin.map(item => item[1])
   values.forEach(item => {
     assertIsHexStr(item)
   })
-  values.map(item => (item.length % 2 ? `0${item.slice(2)}` : item.slice(2)))
+  values = values.map(item => (item.length % 2 !== 0 ? `0${item.slice(2)}` : item.slice(2)))
 
   const offsetsLength = (1 + values.length) * Uint32Length
-  const valuesLength = values.map(value => value.slice(2).length / 2).reduce((total, value) => total + value)
+  const valuesLength = values.map(value => value.length / 2).reduce((total, value) => total + value)
   const length = offsetsLength + valuesLength
   let result = uint32Le(`0x${length.toString(16)}`)
   let offset = offsetsLength
   values.forEach(value => {
     result += uint32Le(`0x${offset.toString(16)}`).slice(2)
-    offset += value.slice(2).length / 2
+    offset += value.length / 2
   })
-  result += values.map(value => value.slice(2)).join('')
+  result += values.join('')
   return result
 }
 
@@ -29,7 +29,7 @@ export const deserializeTable = (serialized: string, sizes: TypeSize[]) => {
   const offsetsLength = (1 + sizes.length) * Uint32Length
   const lengthHex = serialized.slice(0, 10)
   if (littleHexToInt(lengthHex) !== valuesLength + offsetsLength) {
-    throw new TypeError(`Expect sum of size to be correct`)
+    throw new Error(`Expect sum of size to be correct`)
   }
   const value = serialized.slice(2 + (1 + sizes.length) * 2 * Uint32Length)
   const deserialized = deserializeArray(
@@ -38,3 +38,5 @@ export const deserializeTable = (serialized: string, sizes: TypeSize[]) => {
   )
   return sizes.map((size, idx) => [size[0], deserialized[idx]])
 }
+
+export default { serializeTable, deserializeTable }
