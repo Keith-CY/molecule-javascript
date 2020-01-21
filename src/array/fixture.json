@@ -17,21 +17,21 @@
     {
       "source": {
         "serialized": "0x010203",
-        "sizes": [2, 4]
+        "sizes": [1, 2]
       },
       "expected": ["0x01", "0x0203"]
     },
     {
       "source": {
         "serialized": "0x10203",
-        "sizes": [2, 4]
+        "sizes": [1, 2]
       },
       "expected": ["0x01", "0x0203"]
     },
     {
       "source": {
         "serialized": "0x010203",
-        "sizes": [2, 5]
+        "sizes": [1, 3]
       },
       "exception": "Size exceeds the serialized data"
     },
@@ -52,7 +52,7 @@
     {
       "source": {
         "serialized": "0x010203",
-        "sizes": ["2", 5]
+        "sizes": ["1", 2]
       },
       "exception": "Expect size to be a number"
     }

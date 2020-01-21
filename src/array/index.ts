@@ -19,7 +19,7 @@ export const deserializeArray = (serialized: string, sizes: number[]) => {
   })
   const checkpoints: number[] = sizes.reduce(
     (points: number[], size: number) => {
-      return [...points, points[points.length - 1] + size]
+      return [...points, points[points.length - 1] + size * 2]
     },
     [0],
   )
