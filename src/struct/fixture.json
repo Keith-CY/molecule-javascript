@@ -22,9 +22,9 @@
       "source": {
         "serialized": "0x10203",
         "sizes": [
-          ["name0", 2],
-          ["name1", 2],
-          ["name2", 2]
+          ["name0", 1],
+          ["name1", 1],
+          ["name2", 1]
         ]
       },
       "expected": [
