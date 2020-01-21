@@ -40,4 +40,8 @@ export const fromUintLe = (uintLe: string) => {
     .join('')}`
 }
 
-export default { uint16Le, uint32Le, uint64Le, fromUintLe }
+export const littleHexToInt = (littleHex: string) => {
+  return parseInt(fromUintLe(littleHex), 16)
+}
+
+export default { uint16Le, uint32Le, uint64Le, fromUintLe, littleHexToInt }
