@@ -17,8 +17,8 @@ jobs:
       - run: npm ci
       - run: npm run test
       - name: Upload codecov
-      if: matrix.os == 'macos-latest'
-      uses: codecov/codecov-action@v1
-      with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        fail_ci_if_error: true
+        if: matrix.os == 'macos-latest'
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
