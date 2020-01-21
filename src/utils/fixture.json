@@ -47,6 +47,24 @@
       "exception": "Expect hi to be a hex string"
     }
   ],
+  "littleHexToInt": [
+    {
+      "source": "0x120100",
+      "expected": 274
+    },
+    {
+      "source": "12",
+      "exception": "Expect 12 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    },
+    {
+      "source": "hi",
+      "exception": "Expect hi to be a hex string"
+    }
+  ],
   "uint64Le": [
     {
       "source": "0x1234567890abcdef",

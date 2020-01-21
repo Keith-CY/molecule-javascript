@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import Table from '.'
+import { serializeTable, deserializeTable } from '.'
 
 const { serialize: serializeFixture, deserialize: deserializeFixture } = require('./fixture.json')
 
@@ -18,15 +18,15 @@ describe('Test serialize table', () => {
 
   test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
     if (exception) {
-      expect(() => Table.serialize(source)).toThrow(exception)
+      expect(() => serializeTable(source)).toThrow(exception)
     } else {
-      const actual = Table.serialize(source)
+      const actual = serializeTable(source)
       expect(actual).toBe(expected)
     }
   })
 })
 
-describe('Test deserialize struct', () => {
+describe('Test deserialize table', () => {
   const fixtureTable: [
     { serialized: string; sizes: [string, number][] },
     string | undefined,
@@ -43,14 +43,12 @@ describe('Test deserialize struct', () => {
     }) => [source, expected, exception],
   )
 
-  console.log(fixtureTable)
-
-  // test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
-  //   if (exception) {
-  //     expect(() => Table.deserialize(source.serialized, source.sizes)).toThrow(exception)
-  //   } else {
-  //     const actual = Table.deserialize(source.serialized, source.sizes)
-  //     expect(actual).toEqual(expected)
-  //   }
-  // })
+  test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
+    if (exception) {
+      expect(() => deserializeTable(source.serialized, source.sizes)).toThrow(exception)
+    } else {
+      const actual = deserializeTable(source.serialized, source.sizes)
+      expect(actual).toEqual(expected)
+    }
+  })
 })

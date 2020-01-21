@@ -18,6 +18,16 @@ export const uint32Le = (uint32: string) => {
   return `0x${[...new Uint8Array(buf)].map(v => v.toString(16).padStart(2, '0')).join('')}`
 }
 
+export const littleHexToInt = (littleHex: string) => {
+  assertIsHexStr(littleHex)
+  const value = littleHex.slice(2).length % 2 !== 0 ? `0${littleHex.slice(2)}` : littleHex.slice(2)
+  let result = ''
+  for (let i = value.length; i >= 0; i -= 2) {
+    result += value.slice(i - 2, i)
+  }
+  return parseInt(result, 16)
+}
+
 export const uint64Le = (uint64: string) => {
   assertIsHexStr(uint64)
   const val = uint64.slice(2).padStart(16, '0')

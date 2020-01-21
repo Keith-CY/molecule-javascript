@@ -1,7 +1,7 @@
 declare type Byte = string
 declare type HexString = string
-declare type StructElement = [string, string]
-declare type TableElement = [string, any]
+declare type TypeElement = [string, string]
+declare type TypeSize = [string, number]
 
 declare module '*.json' {
   const value: string
