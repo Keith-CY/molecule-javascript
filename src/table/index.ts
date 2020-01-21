@@ -34,7 +34,7 @@ export const deserializeTable = (serialized: string, sizes: TypeSize[]) => {
   const value = serialized.slice(2 + (1 + sizes.length) * 2 * Uint32Length)
   const deserialized = deserializeArray(
     `0x${value}`,
-    sizes.map(structSize => structSize[1]),
+    sizes.map(size => size[1]),
   )
   return sizes.map((size, idx) => [size[0], deserialized[idx]])
 }
