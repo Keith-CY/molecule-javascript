@@ -1,0 +1,57 @@
+{
+  "serialize": [
+    {
+      "source": [
+        [0, "0x030405060708"]
+      ],
+      "expected": "0x00000000030405060708"
+    },
+    {
+      "source": [
+        [2, "0x060708"]
+      ],
+      "expected": "0x02000000060708"
+    },
+    {
+      "source": [
+        [1, "0x060708"],
+        [2, "0x06070809"]
+      ],
+      "exception": "Expect the count of union element to be 1"
+    }
+  ],
+  "deserialize": [
+    {
+      "source": {
+        "serialized": "0x00000000030405060708",
+        "indices": [ 0 ]
+      },
+      "expected": [
+        [0, "0x030405060708"]
+      ]
+    },
+    {
+      "source": {
+        "serialized": "0x02000000060708",
+        "indices": [ 2 ]
+      },
+      "expected": [
+        [2, "0x060708"]
+      ]
+    },
+    {
+      "source": {
+        "serialized": "0x02000000060708",
+        "indices": [ 2, 2 ]
+      },
+      "exception": "Expect the count of union element to be 1"
+    },
+    {
+      "source": {
+        "serialized": "0x01000000060708",
+        "indices": [ 2 ]
+      },
+      "exception": "Expect serialized index to be equal to first indices element"
+    }
+  ]
+}
