@@ -1,57 +1,26 @@
 {
   "serialize": [
     {
-      "source": [
-        ["name", "0x0102030405"]
-      ],
+      "source": "0x0102030405",
       "expected": "0x0102030405"
     },
     {
-      "source": [
-        ["name", ""]
-      ],
+      "source": "",
       "expected": ""
-    },
-    {
-      "source": [
-        ["name0", "0x0102"],
-        ["name1", "0x0102030405"]
-      ],
-      "exception": "Expect the count of option element to be 1"
     }
   ],
   "deserialize": [
     {
       "source": {
-        "serialized": "0x0102030405",
-        "sizes": [
-          ["name", 5]
-        ]
+        "serialized": "0x0102030405"
       },
-      "expected": [
-        ["name", "0x0102030405"]
-      ]
+      "expected": "0x0102030405"
     },
     {
       "source": {
-        "serialized": "",
-        "sizes": [
-          ["name", 0]
-        ]
+        "serialized": ""
       },
-      "expected": [
-        ["name", ""]
-      ]
-    },
-    {
-      "source": {
-        "serialized": "0x0102030405",
-        "sizes": [
-          ["name0", 2],
-          ["name1", 3]
-        ]
-      },
-      "exception": "Expect the count of option element to be 1"
+      "expected": ""
     }
   ]
 }

@@ -5,11 +5,11 @@ const { serialize: serializeFixture, deserialize: deserializeFixture } = require
 
 describe('Test serialize option', () => {
   const fixtureTable: [
-    any[],
+    any,
     string | undefined,
     string | undefined,
   ][] = serializeFixture.map(
-    ({ source, expected, exception }: { source: any[]; expected?: string; exception?: string }) => [
+    ({ source, expected, exception }: { source: any; expected?: string; exception?: string }) => [
       source,
       expected,
       exception,
@@ -28,26 +28,22 @@ describe('Test serialize option', () => {
 
 describe('Test deserialize option', () => {
   const fixtureTable: [
-    { serialized: string; sizes: [string, number][] },
+    { serialized: string },
     string | undefined,
     string | undefined,
   ][] = deserializeFixture.map(
-    ({
+    ({ source, expected, exception }: { source: { serialized: string }; expected?: string; exception?: string }) => [
       source,
       expected,
       exception,
-    }: {
-      source: { serialized: string; sizes: [string, number][] }
-      expected?: string
-      exception?: string
-    }) => [source, expected, exception],
+    ],
   )
 
   test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
     if (exception) {
-      expect(() => deserializeOption(source.serialized, source.sizes)).toThrow(exception)
+      expect(() => deserializeOption(source.serialized)).toThrow(exception)
     } else {
-      const actual = deserializeOption(source.serialized, source.sizes)
+      const actual = deserializeOption(source.serialized)
       expect(actual).toEqual(expected)
     }
   })
