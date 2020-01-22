@@ -28,7 +28,7 @@ describe('Test serialize table', () => {
 
 describe('Test deserialize table', () => {
   const fixtureTable: [
-    { serialized: string; indices: [string, number][] },
+    { serialized: string; indices: number[] },
     string | undefined,
     string | undefined,
   ][] = deserializeFixture.map(
@@ -37,7 +37,7 @@ describe('Test deserialize table', () => {
       expected,
       exception,
     }: {
-      source: { serialized: string; indices: [string, number][] }
+      source: { serialized: string; indices: number[] }
       expected?: string
       exception?: string
     }) => [source, expected, exception],
