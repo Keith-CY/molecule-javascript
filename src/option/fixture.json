@@ -5,6 +5,14 @@
       "expected": "0x0102030405"
     },
     {
+      "source": "0102030405",
+      "exception": "Expect 0102030405 to be a hex string"
+    },
+    {
+      "source": "ab",
+      "exception": "Expect ab to be a hex string"
+    },
+    {
       "source": "",
       "expected": ""
     }
@@ -15,6 +23,12 @@
         "serialized": "0x0102030405"
       },
       "expected": "0x0102030405"
+    },
+    {
+      "source": {
+        "serialized": "0102030405"
+      },
+      "exception": "Expect 0102030405 to be a hex string"
     },
     {
       "source": {
