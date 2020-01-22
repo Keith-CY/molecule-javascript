@@ -86,10 +86,11 @@
       - `vector Bytes <byte>`
 
         - the serialized bytes of an empty bytes is `00 00 00 00 |`(the length of any empty fixed-vector is 0)
-        - the serialized bytes of `0x12` is `00 00 00 00 | 12`
-        - the serialzied bytes of `0x1234567890abcdef` if `08 00 00 00 | 12 34 56 78 90 ab cd ef`
+        - the serialized bytes of `0x12` is `01 00 00 00 | 12`
+        - the serialzied bytes of `0x1234567890abcdef` is `08 00 00 00 | 12 34 56 78 90 ab cd ef`
 
       - `vector Uint32Vec <Uint32>`
+
         - the serialized bytes of empty `Uint32Vec` is `00 00 00 00 |`
         - the serialized bytes of `0x123`(or `[0x123]`) is `01 00 00 00 | 23 01 00 00`
         - the serialized bytes of `[0x123 0x456, 0x7890, 0xa, 0xbc, 0xdef]` is `06 00 00 00 | 23 01 00 00 | 56 04 00 00 | 90 78 00 00 | 0a 00 00 00 | bc 00 00 00 | ef 0d 00 00`

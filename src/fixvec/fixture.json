@@ -1,0 +1,62 @@
+{
+  "serialize": [
+    {
+      "source": [],
+      "expected": "0x00000000"
+    },
+    {
+      "source": ["0x12"],
+      "expected": "0x0100000012"
+    },
+    {
+      "source": ["0x2"],
+      "expected": "0x0100000002"
+    },
+    {
+      "source": ["0x12", "0x34", "0x56", "0x78", "0x90", "0xab", "0xcd", "0xef"],
+      "expected": "0x080000001234567890abcdef"
+    },
+    {
+      "source": ["0x23010000"],
+      "expected": "0x0100000023010000"
+    },
+    {
+      "source": "0x12",
+      "exception": "Expect 0x12 to be an array"
+    },
+    {
+      "source": ["0x12", "0x234"],
+      "exception": "Expect items of an array to have the same size"
+    },
+    {
+      "source": ["12"],
+      "exception": "Expect 12 to be a hex string"
+    }
+  ],
+  "deserialize": [
+    {
+      "source": "0x00000000",
+      "expected": []
+    },
+    {
+      "source": "0x0100000012",
+      "expected": ["0x12"]
+    },
+    {
+      "source": "0x080000001234567890abcdef",
+      "expected": ["0x12", "0x34", "0x56", "0x78", "0x90", "0xab", "0xcd", "0xef"]
+    },
+    {
+      "source": "0x0100000023010000",
+      "expected": ["0x23010000"]
+    },
+    {
+      "source": "12",
+      "exception": "Expect 12 to be a hex string"
+    },
+    {
+      "source": "0x0500000023010000",
+      "exception": "23010000 cannot be divided into 5 parts"
+    }
+  ]
+}

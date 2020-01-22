@@ -22,7 +22,8 @@
         "js": "never",
         "ts": "never"
       }
-    ]
+    ],
+    "no-plusplus": [0]
   },
   "settings": {
     "import/resolver": {
