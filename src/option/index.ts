@@ -1,6 +1,6 @@
 import { assertIsHexStr } from '../utils'
 
-export const serializeOption = (origin: HexString) => {
+export const serializeOption = (origin: string) => {
   if (origin) {
     assertIsHexStr(origin)
   }
