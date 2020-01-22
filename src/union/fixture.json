@@ -2,20 +2,20 @@
   "serialize": [
     {
       "source": [
-        ["name", 0, "0x030405060708"]
+        [0, "0x030405060708"]
       ],
       "expected": "0x00000000030405060708"
     },
     {
       "source": [
-        ["name", 2, "0x060708"]
+        [2, "0x060708"]
       ],
       "expected": "0x02000000060708"
     },
     {
       "source": [
-        ["name", 1, "0x060708"],
-        ["name", 2, "0x06070809"]
+        [1, "0x060708"],
+        [2, "0x06070809"]
       ],
       "exception": "Expect the count of union element to be 1"
     }
@@ -24,41 +24,32 @@
     {
       "source": {
         "serialized": "0x00000000030405060708",
-        "indices": [
-          ["name", 0]
-        ]
+        "indices": [ 0 ]
       },
       "expected": [
-        ["name", 0, "0x030405060708"]
+        [0, "0x030405060708"]
       ]
     },
     {
       "source": {
         "serialized": "0x02000000060708",
-        "indices": [
-          ["name", 2]
-        ]
+        "indices": [ 2 ]
       },
       "expected": [
-        ["name", 2, "0x060708"]
+        [2, "0x060708"]
       ]
     },
     {
       "source": {
         "serialized": "0x02000000060708",
-        "indices": [
-          ["name", 2],
-          ["name", 2]
-        ]
+        "indices": [ 2, 2 ]
       },
       "exception": "Expect the count of union element to be 1"
     },
     {
       "source": {
         "serialized": "0x01000000060708",
-        "indices": [
-          ["name", 2]
-        ]
+        "indices": [ 2 ]
       },
       "exception": "Expect serialized index to be equal to first indices element"
     }
