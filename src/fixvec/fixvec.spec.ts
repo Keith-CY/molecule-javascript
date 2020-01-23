@@ -26,7 +26,7 @@ describe('Test serialize fixvec', () => {
   })
 })
 
-describe('Test deserialize array', () => {
+describe('Test deserialize fixvec', () => {
   const fixtureTable: [
     string,
     string[] | undefined,
