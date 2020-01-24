@@ -1,0 +1,54 @@
+{
+  "serialize": [
+    {
+      "source": [],
+      "expected": "0x04000000"
+    },
+    {
+      "source": ["0x020000001234"],
+      "expected": "0x0e00000008000000020000001234"
+    },
+    {
+      "source": ["0x20000001234"],
+      "expected": "0x0e00000008000000020000001234"
+    },
+    {
+      "source": ["0x020000001234", "0x00000000", "0x020000000567", "0x0100000089", "0x03000000abcdef"],
+      "expected": "0x34000000180000001e00000022000000280000002d00000002000000123400000000020000000567010000008903000000abcdef"
+    },
+    {
+      "source": "0x12",
+      "exception": "Expect 0x12 to be an array"
+    },
+    {
+      "source": ["12"],
+      "exception": "Expect 12 to be a hex string"
+    }
+  ],
+  "deserialize": [
+    {
+      "source": "0x04000000",
+      "expected": []
+    },
+    {
+      "source": "0x0e00000008000000020000001234",
+      "expected": ["0x020000001234"]
+    },
+    {
+      "source": "0x34000000180000001e00000022000000280000002d00000002000000123400000000020000000567010000008903000000abcdef",
+      "expected": ["0x020000001234", "0x00000000", "0x020000000567", "0x0100000089", "0x03000000abcdef"]
+    },
+    {
+      "source": "0x05000000",
+      "exception": "The full size of 0x05000000 is incorrect"
+    },
+    {
+      "source": "12",
+      "exception": "Expect 12 to be a hex string"
+    },
+    {
+      "source": "0x0e00000007000000020000001234",
+      "exception": "Expect offset 0x070000 to have a size of 4 bytes"
+    }
+  ]
+}
