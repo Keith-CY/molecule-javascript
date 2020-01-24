@@ -11,6 +11,10 @@
     {
       "source": ["01", "02", "03"],
       "exception": "Expect 01 to be a hex string"
+    },
+    {
+      "source": "0x010203",
+      "exception": "Expect 0x010203 to be an array"
     }
   ],
   "deserialize": [
