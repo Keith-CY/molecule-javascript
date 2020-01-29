@@ -1,0 +1,58 @@
+{
+  "serialize": [
+    {
+      "schema": {
+        "name": "array > array > array",
+        "type": "array",
+        "item": {
+          "name": "array > array",
+          "type": "array",
+          "item": {
+            "name": "array",
+            "type": "array"
+          }
+        }
+      },
+      "value": [
+        [
+          ["0x01", "0x02", "0x03"],
+          ["0x01", "0x02", "0x03"],
+          ["0x01", "0x02", "0x03"]
+        ],
+        [
+          ["0x1", "0x2", "0x3"],
+          ["0x1", "0x2", "0x3"],
+          ["0x1", "0x2", "0x3"]
+        ]
+      ],
+      "expected": "0x010203010203010203010203010203010203"
+    },
+    {
+      "schema": {
+        "name": "fixvec > fixvec",
+        "type": "fixvec",
+        "item": {
+          "name": "fixvec",
+          "type": "fixvec"
+        }
+      },
+      "value": [
+        ["0x12", "0x2"],
+        ["0x12", "0x2"]
+      ],
+      "expected": "0x02000000020000001202020000001202"
+    },
+    {
+      "schema": {
+        "name": "dynvec > dynvec",
+        "type": "dynvec",
+        "item": {
+          "name": "dynvec",
+          "type": "dynvec"
+        }
+      },
+      "value": [["0x020000001234"], ["0x020000001234"]],
+      "expected": "0x280000000c0000001a0000000e000000080000000200000012340e00000008000000020000001234"
+    }
+  ]
+}
