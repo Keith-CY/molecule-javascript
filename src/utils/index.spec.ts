@@ -1,12 +1,10 @@
-/* eslint-disable import/extensions */
 import { uint16Le, uint32Le, uint64Le, fromUintLe } from '.'
-
-const {
-  uint16Le: uint16LeFixture,
-  uint32Le: uint32LeFixture,
-  uint64Le: uint64LeFixture,
-  fromUintLe: fromUintLeFixture,
-} = require('./fixture.json')
+import {
+  uint16Le as uint16LeFixture,
+  uint32Le as uint32LeFixture,
+  uint64Le as uint64LeFixture,
+  fromUintLe as fromUintLeFixture,
+} from './fixture.json'
 
 type Fixture = Readonly<{
   source: any

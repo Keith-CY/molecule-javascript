@@ -1,22 +1,10 @@
-/* eslint-disable import/extensions */
 import { serializeDynvec, deserializeDynvec } from '.'
-
-const { serialize: serializeFixture, deserialize: deserializeFixture } = require('./fixture.json')
+import { serialize as serializeFixture, deserialize as deserializeFixture } from './fixture.json'
 
 describe('Test serialize dynvec', () => {
-  const fixtureTable: [
-    any[],
-    string | undefined,
-    string | undefined,
-  ][] = serializeFixture.map(
-    ({ source, expected, exception }: { source: any[]; expected?: string; exception?: string }) => [
-      source,
-      expected,
-      exception,
-    ],
-  )
+  const fixtureTable = serializeFixture.map(({ source, expected, exception }) => [source, expected, exception])
 
-  test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
+  test.each(fixtureTable)(`%s => %s ? %s`, (source: any, expected: any, exception: any) => {
     if (exception) {
       expect(() => serializeDynvec(source)).toThrow(exception)
     } else {
@@ -27,23 +15,13 @@ describe('Test serialize dynvec', () => {
 })
 
 describe('Test deserialize dynvec', () => {
-  const fixtureTable: [
-    string,
-    string[] | undefined,
-    string | undefined,
-  ][] = deserializeFixture.map(
-    ({ source, expected, exception }: { source: string; expected?: string[]; exception?: string }) => [
-      source,
-      expected,
-      exception,
-    ],
-  )
+  const fixtureTable = deserializeFixture.map(({ source, expected, exception }) => [source, expected, exception])
 
   test.each(fixtureTable)(`%s => %s ? %s`, (source, expected, exception) => {
     if (exception) {
-      expect(() => deserializeDynvec(source)).toThrow(exception)
+      expect(() => deserializeDynvec(source as string)).toThrow(exception as string)
     } else {
-      const actual = deserializeDynvec(source)
+      const actual = deserializeDynvec(source as string)
       expect(actual).toEqual(expected)
     }
   })
