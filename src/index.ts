@@ -69,12 +69,13 @@ class Molecule {
 
     if (this.isBasicObject(copied)) {
       const result = this.serializeBasic(this.schema!.type, copied)
+      console.log(result)
       return result
     }
 
     const normalized = this.normalize(copied)
     const result = this.serializeBasic(this.schema!.type, normalized)
-
+    console.log(result)
     return result
   }
 
@@ -144,6 +145,7 @@ class Molecule {
         })
       case 'option':
       case 'union':
+        return [[copied[0], new Molecule((this.schema as any).items[copied[0]]).serialize(copied[1])]]
       case 'struct':
         return copied.map((item: any, index: number) => {
           const s = new Molecule((this.schema as any).fields[index])
