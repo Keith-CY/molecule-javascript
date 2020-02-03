@@ -20,7 +20,6 @@ export const serializeFixvec = (fixvec: HexString[]) => {
   })
 
   const header = uint32Le(`0x${data.length.toString(16)}`).slice(2)
-
   const body = data.join('')
   return `0x${header}${body}`
 }
