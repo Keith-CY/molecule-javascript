@@ -73,6 +73,7 @@ class Molecule {
     }
 
     const normalized = this.normalize(copied)
+    console.log(normalized)
     const result = this.serializeBasic(this.schema!.type, normalized)
 
     return result
@@ -145,6 +146,10 @@ class Molecule {
       case 'option':
       case 'union':
       case 'struct':
+        return copied.map((item: any, index: number) => {
+          const s = new Molecule((this.schema as any).fields[index])
+          return [item[0], s.serialize(item[1])]
+        })
       case 'table':
       default:
         return ''
