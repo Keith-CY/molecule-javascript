@@ -75,6 +75,44 @@
         ["name2", ["0x12", "0x34", "0x56", "0x78", "0x90", "0xab", "0xcd", "0xef"]]
       ],
       "expected": "0x010203080000001234567890abcdef"
+    },
+    {
+      "schema": {
+        "name": "table > [struct -> [array, fixvec], dynvec] ",
+        "type": "table",
+        "fields": [
+          {
+            "name": "struct",
+            "type": "struct",
+            "fields": [
+              {
+                "name": "array",
+                "type": "array",
+                "itemCount": 2
+              },
+              {
+                "name": "fixvec",
+                "type": "fixvec"
+              }
+            ]
+          },
+          {
+            "name": "dynvec",
+            "type": "dynvec"
+          }
+        ]
+      },
+      "value": [
+        [
+          "name1",
+          [
+            ["name11", ["0x01", "0x02", "0x03"]],
+            ["name12", ["0x12", "0x34", "0x56", "0x78", "0x90", "0xab", "0xcd", "0xef"]]
+          ]
+        ],
+        ["name2", ["0x020000001234", "0x00000000", "0x020000000567", "0x0100000089", "0x03000000abcdef"]]
+      ],
+      "expected": "0x4f0000000c0000001b000000010203080000001234567890abcdef34000000180000001e00000022000000280000002d00000002000000123400000000020000000567010000008903000000abcdef"
     }
   ]
 }
