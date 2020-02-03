@@ -9,9 +9,12 @@
           "type": "array",
           "item": {
             "name": "array",
-            "type": "array"
-          }
-        }
+            "type": "array",
+            "itemCount": 3
+          },
+          "itemCount": 3
+        },
+        "itemCount": 2
       },
       "value": [
         [
@@ -62,7 +65,7 @@
           {
             "name": "array",
             "type": "array",
-            "itemCount": 2
+            "itemCount": 3
           },
           {
             "name": "fixvec",
@@ -88,7 +91,7 @@
               {
                 "name": "array",
                 "type": "array",
-                "itemCount": 2
+                "itemCount": 3
               },
               {
                 "name": "fixvec",
@@ -126,7 +129,7 @@
               {
                 "name": "array",
                 "type": "array",
-                "itemCount": 2
+                "itemCount": 3
               },
               {
                 "name": "fixvec",
@@ -165,7 +168,7 @@
               {
                 "name": "array",
                 "type": "array",
-                "itemCount": 2
+                "itemCount": 3
               },
               {
                 "name": "fixvec",

@@ -92,11 +92,21 @@ class Molecule {
     if (!Molecule.types.includes(schema.type)) {
       throw new Error('Schema has invalid type')
     }
+    if (schema.type === 'array') {
+      if (!schema.itemCount || schema.itemCount === 0) {
+        throw new Error('ArraySchema must have itemCount')
+      }
+    }
   }
 
   private isBasicObject = (obj: { [index: string]: string } | string[]) => {
     switch (this.schema?.type) {
       case 'array':
+        return (
+          Array.isArray(obj) &&
+          obj.every(item => typeof item === 'string') &&
+          obj.length === (this.schema as ArraySchema).itemCount
+        )
       case 'fixvec':
       case 'dynvec':
         return Array.isArray(obj) && obj.every(item => typeof item === 'string')
