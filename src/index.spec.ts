@@ -1,7 +1,7 @@
 import Molecule from '.'
-import { serialize as serializeFixture } from './fixture.json'
+import { serialize as serializeFixture } from './fixture_serialize.json'
 
-describe('Test Molecule serialzie', () => {
+describe('Test Molecule serialize', () => {
   const fixtureTable = serializeFixture.map(({ schema, value, expected }) => [schema, value, expected])
 
   test.each(fixtureTable)(`%s => %s ? %s`, (schema: any, value, expected) => {
