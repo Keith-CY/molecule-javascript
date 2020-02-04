@@ -1,17 +1,22 @@
-import { serializeArray } from './array'
-import { serializeFixvec } from './fixvec'
-import { serializeDynvec } from './dynvec'
-import { serializeOption } from './option'
-import { serializeUnion } from './union'
+import { serializeArray, deserializeArray } from './array'
+import { serializeFixvec, deserializeFixvec } from './fixvec'
+import { serializeDynvec, deserializeDynvec } from './dynvec'
+import { serializeOption, deserializeOption } from './option'
+import { serializeUnion, deserializeUnion } from './union'
 import { serializeTable } from './table'
 import { serializeStruct } from './struct'
+import { littleHexToInt } from './utils'
+import { HEADER_ELEMENT_SIZE } from './utils/const'
+
+const ByteItem = 'byte'
 
 interface SchemaBasis {
   name: string
 }
+
 interface ArraySchema extends SchemaBasis {
   type: 'array'
-  item?: Schema
+  item: string
   itemCount: number
 }
 
@@ -68,19 +73,25 @@ class Molecule {
     const copied: { [key: string]: string } | string[] = JSON.parse(JSON.stringify(obj))
 
     if (this.isBasicObject(copied)) {
-      const result = this.serializeBasic(this.schema!.type, copied)
+      const result = this.serializeBasic(copied)
       return result
     }
 
     const normalized = this.normalize(copied)
-    const result = this.serializeBasic(this.schema!.type, normalized)
+    const result = this.serializeBasic(normalized)
 
     return result
   }
 
-  // public deserialzie = (serialized: string) => {
-  //   console.log(serialized)
-  // }
+  public deserialize = (serialized: string) => {
+    if (this.isBasicSerialized()) {
+      return this.deserializeBasic(serialized)
+    }
+    const normalized = this.normalizeSerialized(serialized)
+    const result = this.deserializeBasic(normalized)
+
+    return result
+  }
 
   private validateSchema = (schema: Schema) => {
     if (!schema) {
@@ -100,7 +111,7 @@ class Molecule {
   }
 
   private isBasicObject = (obj: { [index: string]: string } | string[]) => {
-    switch (this.schema?.type) {
+    switch (this.schema!.type) {
       case 'array':
         return (
           Array.isArray(obj) &&
@@ -122,8 +133,8 @@ class Molecule {
     }
   }
 
-  private serializeBasic = (type: Schema['type'], value: any) => {
-    switch (type) {
+  private serializeBasic = (value: any) => {
+    switch (this.schema!.type) {
       case 'array':
         return serializeArray(value)
       case 'fixvec':
@@ -166,6 +177,62 @@ class Molecule {
           const s = new Molecule((this.schema as any).fields[index])
           return [item[0], s.serialize(item[1])]
         })
+      default:
+        return ''
+    }
+  }
+
+  private deserializeBasic = (value: string) => {
+    switch (this.schema!.type) {
+      case 'array':
+        return deserializeArray(
+          value,
+          '1'
+            .repeat((this.schema as ArraySchema)!.itemCount)
+            .split('')
+            .map(item => Number(item)),
+        )
+      case 'fixvec':
+        return deserializeFixvec(value)
+      case 'dynvec':
+        return deserializeDynvec(value)
+      case 'option':
+        return deserializeOption(value)
+      case 'union':
+        return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE))])
+      case 'struct':
+      case 'table':
+      default:
+        return ''
+    }
+  }
+
+  private isBasicSerialized = () => {
+    switch (this.schema!.type) {
+      case 'array':
+      case 'fixvec':
+      case 'dynvec':
+      case 'option':
+        return (this.schema as ArraySchema).item === ByteItem
+      case 'union':
+      case 'table':
+      case 'struct':
+        return false
+      default:
+        throw new Error('Invalid type')
+    }
+  }
+
+  private normalizeSerialized = (copied: string) => {
+    console.log(copied)
+    switch (this.schema!.type) {
+      case 'array':
+      case 'fixvec':
+      case 'dynvec':
+      case 'option':
+      case 'union':
+      case 'struct':
+      case 'table':
       default:
         return ''
     }

@@ -1,4 +1,5 @@
 import { uint32Le, littleHexToInt, assertIsHexStr } from '../utils'
+import { HEADER_ELEMENT_SIZE } from '../utils/const'
 
 export const serializeDynvec = (dynvec: HexString[]) => {
   if (!Array.isArray(dynvec)) {
@@ -7,7 +8,6 @@ export const serializeDynvec = (dynvec: HexString[]) => {
   dynvec.forEach(item => {
     assertIsHexStr(item)
   })
-  const HEADER_ELEMENT_SIZE = 4
   const HEADER_SIZE = HEADER_ELEMENT_SIZE * dynvec.length + HEADER_ELEMENT_SIZE
 
   const data = dynvec.map(item => (item.length % 2 ? `0${item.slice(2)}` : item.slice(2)))
@@ -33,7 +33,7 @@ export const serializeDynvec = (dynvec: HexString[]) => {
 
 export const deserializeDynvec = (serialized: HexString) => {
   assertIsHexStr(serialized)
-  const HEADER_ELEMENT_SIZE = 4
+
   const fullSize = littleHexToInt(serialized.slice(0, HEADER_ELEMENT_SIZE))
 
   if (fullSize * 2 !== serialized.slice(2).length) {

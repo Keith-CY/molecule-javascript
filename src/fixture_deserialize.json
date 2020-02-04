@@ -1,0 +1,32 @@
+{
+  "deserialize": [
+    {
+      "schema": {
+        "name": "array > byte",
+        "type": "array",
+        "item": "byte",
+        "itemCount": 3
+      },
+      "value": "0x010203",
+      "expected": ["0x01", "0x02", "0x03"]
+    },
+    {
+      "schema": {
+        "name": "fixvec > byte",
+        "type": "fixvec",
+        "item": "byte"
+      },
+      "value": "0x020000001212",
+      "expected": ["0x12", "0x12"]
+    },
+    {
+      "schema": {
+        "name": "dynvec > byte",
+        "type": "dynvec",
+        "item": "byte"
+      },
+      "value": "0x0e0000000c0000000d0000003412",
+      "expected": ["0x34", "0x12"]
+    }
+  ]
+}
