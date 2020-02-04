@@ -92,11 +92,21 @@ class Molecule {
     if (!Molecule.types.includes(schema.type)) {
       throw new Error('Schema has invalid type')
     }
+    if (schema.type === 'array') {
+      if (!schema.itemCount || schema.itemCount === 0) {
+        throw new Error('ArraySchema must have itemCount')
+      }
+    }
   }
 
   private isBasicObject = (obj: { [index: string]: string } | string[]) => {
     switch (this.schema?.type) {
       case 'array':
+        return (
+          Array.isArray(obj) &&
+          obj.every(item => typeof item === 'string') &&
+          obj.length === (this.schema as ArraySchema).itemCount
+        )
       case 'fixvec':
       case 'dynvec':
         return Array.isArray(obj) && obj.every(item => typeof item === 'string')
@@ -143,9 +153,19 @@ class Molecule {
           return s.serialize(item)
         })
       case 'option':
+        return new Molecule((this.schema as any).item).serialize(copied)
       case 'union':
+        return [[copied[0], new Molecule((this.schema as any).items[copied[0]]).serialize(copied[1])]]
       case 'struct':
+        return copied.map((item: any, index: number) => {
+          const s = new Molecule((this.schema as any).fields[index])
+          return [item[0], s.serialize(item[1])]
+        })
       case 'table':
+        return copied.map((item: any, index: number) => {
+          const s = new Molecule((this.schema as any).fields[index])
+          return [item[0], s.serialize(item[1])]
+        })
       default:
         return ''
     }
