@@ -19,9 +19,9 @@ describe('Test deserialize array', () => {
 
   test.each(fixtureTable)(`%s => %s ? %s`, (source: any, expected: any, exception: any) => {
     if (exception) {
-      expect(() => deserializeArray(source.serialized, source.sizes)).toThrow(exception)
+      expect(() => deserializeArray(source.serialized, source.itemCount)).toThrow(exception)
     } else {
-      const actual = deserializeArray(source.serialized, source.sizes)
+      const actual = deserializeArray(source.serialized, source.itemCount)
       expect(actual).toEqual(expected)
     }
   })

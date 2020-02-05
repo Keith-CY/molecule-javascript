@@ -185,13 +185,7 @@ class Molecule {
   private deserializeBasic = (value: string) => {
     switch (this.schema!.type) {
       case 'array':
-        return deserializeArray(
-          value,
-          '1'
-            .repeat((this.schema as ArraySchema)!.itemCount)
-            .split('')
-            .map(item => Number(item)),
-        )
+        return deserializeArray(value, (this.schema as ArraySchema)!.itemCount)
       case 'fixvec':
         return deserializeFixvec(value)
       case 'dynvec':
