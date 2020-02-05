@@ -2,17 +2,21 @@ import { serializeArray, deserializeArray } from './array'
 import { serializeFixvec, deserializeFixvec } from './fixvec'
 import { serializeDynvec, deserializeDynvec } from './dynvec'
 import { serializeOption, deserializeOption } from './option'
+import { serializeTable, deserializeTable } from './table'
 import { serializeUnion, deserializeUnion } from './union'
-import { serializeTable } from './table'
-import { serializeStruct } from './struct'
+import { serializeStruct, deserializeStruct } from './struct'
 import { littleHexToInt } from './utils'
 import { HEADER_ELEMENT_SIZE } from './utils/const'
 
-const ByteItem = 'byte'
+const SCHEMA_HAS_INVALID_TYPE = 'Schema has invalid type'
 
 interface FieldBasis {
   name: string
 }
+interface StructBasis extends FieldBasis {
+  bytesize: number
+}
+interface TableBasis extends FieldBasis {}
 
 interface ByteSchema {
   type: 'byte'
@@ -42,11 +46,11 @@ interface UnionSchema {
 }
 interface StructSchema {
   type: 'struct'
-  fields: ((ArraySchema | StructSchema | ByteSchema) & FieldBasis)[]
+  fields: ((ArraySchema | StructSchema | ByteSchema) & StructBasis)[]
 }
 interface TableSchema {
   type: 'table'
-  fields: (Schema & FieldBasis)[]
+  fields: (Schema & TableBasis)[]
 }
 
 type Schema =
@@ -74,7 +78,7 @@ class Molecule {
   private schema!: Schema
 
   constructor(schema: Schema) {
-    this.setSchema(schema)
+    this.setSchema(schema || { type: 'byte' })
   }
 
   public static getBasicTypes = () => {
@@ -105,13 +109,8 @@ class Molecule {
   }
 
   public deserialize = (serialized: string) => {
-    if (this.isBasicSerialized()) {
-      return this.deserializeBasic(serialized)
-    }
-    const normalized = this.normalizeSerialized(serialized)
-    const result = this.deserializeBasic(normalized)
-
-    return result
+    const deserialized = this.deserializeBasic(serialized)
+    return this.deserializeChildren(deserialized)
   }
 
   private validateSchema = (schema: Schema) => {
@@ -121,8 +120,8 @@ class Molecule {
     if (typeof schema !== 'object') {
       throw new Error('Schema is invalid')
     }
-    if (!Molecule.types.includes(schema.type)) {
-      throw new Error('Schema has invalid type')
+    if (Molecule.types.indexOf(schema.type) < 0) {
+      throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
     if (schema.type === 'array') {
       if (!schema.itemCount || schema.itemCount === 0) {
@@ -148,7 +147,7 @@ class Molecule {
       case 'struct':
         return Array.isArray(obj) && obj.every(([, val]) => typeof val === 'string')
       default:
-        throw new Error('Invalid type')
+        throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
   }
 
@@ -171,7 +170,7 @@ class Molecule {
       case 'table':
         return serializeTable(value)
       default:
-        return ''
+        throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
   }
 
@@ -201,7 +200,7 @@ class Molecule {
           return [item[0], s.serialize(item[1])]
         })
       default:
-        return ''
+        throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
   }
 
@@ -220,43 +219,48 @@ class Molecule {
       case 'union':
         return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE))])
       case 'struct':
+        return deserializeStruct(
+          value,
+          this.schema.fields.map(field => [field.name, field.bytesize]),
+        )
       case 'table':
+        return deserializeTable(
+          value,
+          this.schema.fields.map(field => field.name),
+        )
       default:
-        return ''
+        throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
   }
 
-  private isBasicSerialized = () => {
+  private deserializeChildren = (deserialized: any): any => {
     switch (this.schema.type) {
       case 'byte':
-        return true
+        return deserialized
       case 'array':
+        return deserialized.map((value: string) => new Molecule((this.schema as ArraySchema).item).deserialize(value))
       case 'fixvec':
       case 'dynvec':
-      case 'option':
-        return this.schema.item.type === ByteItem
-      case 'union':
-      case 'table':
-      case 'struct':
-        return false
-      default:
-        throw new Error('Invalid type')
-    }
-  }
+        return deserialized.map((value: string) => new Molecule((this.schema as DynvecSchema).item).deserialize(value))
 
-  private normalizeSerialized = (copied: string) => {
-    console.log(copied)
-    switch (this.schema.type) {
-      case 'byte':
-      case 'array':
-      case 'fixvec':
-      case 'dynvec':
-      case 'option':
       case 'union':
+        return [
+          [deserialized[0][0], new Molecule(this.schema.items[deserialized[0][0]]).deserialize(deserialized[0][1])],
+        ]
+      case 'option':
+        return deserialized ? new Molecule(this.schema.item).deserialize(deserialized) : deserialized
       case 'struct':
+        return this.schema.fields.map((field, idx) => {
+          const res = new Molecule(field).deserialize(deserialized[idx][1])
+          return [field.name, res]
+        })
       case 'table':
+        return this.schema.fields.map((field, idx) => {
+          const res = new Molecule(field).deserialize(deserialized[idx][1])
+          return [field.name, res]
+        })
       default:
-        return ''
+        throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
   }
 }
