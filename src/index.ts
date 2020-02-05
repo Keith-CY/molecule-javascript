@@ -10,47 +10,68 @@ import { HEADER_ELEMENT_SIZE } from './utils/const'
 
 const ByteItem = 'byte'
 
-interface SchemaBasis {
+interface FieldBasis {
   name: string
 }
 
-interface ArraySchema extends SchemaBasis {
+interface ByteSchema {
+  type: 'byte'
+}
+
+interface ArraySchema {
   type: 'array'
-  item: string
+  item: ArraySchema | StructSchema | ByteSchema
   itemCount: number
 }
 
-interface FixvecSchema extends SchemaBasis {
+interface FixvecSchema {
   type: 'fixvec'
-  item: string
+  item: ArraySchema | StructSchema | ByteSchema
 }
-interface DynvecSchema extends SchemaBasis {
+interface DynvecSchema {
   type: 'dynvec'
-  item: string
+  item: Schema
 }
-interface OptionSchema extends SchemaBasis {
+interface OptionSchema {
   type: 'option'
-  item: string
+  item: Schema
 }
-interface UnionSchema extends SchemaBasis {
+interface UnionSchema {
   type: 'union'
-  items: string[]
+  items: Schema[]
 }
-interface StructSchema extends SchemaBasis {
+interface StructSchema {
   type: 'struct'
-  fields: Schema[]
+  fields: ((ArraySchema | StructSchema | ByteSchema) & FieldBasis)[]
 }
-interface TableSchema extends SchemaBasis {
+interface TableSchema {
   type: 'table'
-  fields: Schema[]
+  fields: (Schema & FieldBasis)[]
 }
 
-type Schema = ArraySchema | FixvecSchema | DynvecSchema | OptionSchema | UnionSchema | StructSchema | TableSchema
+type Schema =
+  | ByteSchema
+  | ArraySchema
+  | FixvecSchema
+  | DynvecSchema
+  | OptionSchema
+  | UnionSchema
+  | StructSchema
+  | TableSchema
+
+export const isByteSchema = (schema: Pick<Schema, 'type'>): schema is ByteSchema => schema.type === 'byte'
+export const isArraySchema = (schema: Pick<Schema, 'type'>): schema is ArraySchema => schema.type === 'array'
+export const isFixvecSchema = (schema: Pick<Schema, 'type'>): schema is FixvecSchema => schema.type === 'fixvec'
+export const isDynvecSchema = (schema: Pick<Schema, 'type'>): schema is DynvecSchema => schema.type === 'dynvec'
+export const isOptionSchema = (schema: Pick<Schema, 'type'>): schema is OptionSchema => schema.type === 'option'
+export const isUnionSchema = (schema: Pick<Schema, 'type'>): schema is UnionSchema => schema.type === 'union'
+export const isStructSchema = (schema: Pick<Schema, 'type'>): schema is StructSchema => schema.type === 'struct'
+export const isTableSchema = (schema: Pick<Schema, 'type'>): schema is TableSchema => schema.type === 'table'
 
 class Molecule {
-  private static types = ['array', 'fixvec', 'dynvec', 'option', 'union', 'struct', 'table']
+  private static types = ['byte', 'array', 'fixvec', 'dynvec', 'option', 'union', 'struct', 'table']
 
-  private schema: Schema | undefined
+  private schema!: Schema
 
   constructor(schema: Schema) {
     this.setSchema(schema)
@@ -110,14 +131,12 @@ class Molecule {
     }
   }
 
-  private isBasicObject = (obj: { [index: string]: string } | string[]) => {
-    switch (this.schema!.type) {
+  private isBasicObject = (obj: { [index: string]: string } | string[] | string) => {
+    switch (this.schema.type) {
+      case 'byte':
+        return typeof obj === 'string'
       case 'array':
-        return (
-          Array.isArray(obj) &&
-          obj.every(item => typeof item === 'string') &&
-          obj.length === (this.schema as ArraySchema).itemCount
-        )
+        return Array.isArray(obj) && obj.every(item => typeof item === 'string') && obj.length === this.schema.itemCount
       case 'fixvec':
       case 'dynvec':
         return Array.isArray(obj) && obj.every(item => typeof item === 'string')
@@ -134,7 +153,9 @@ class Molecule {
   }
 
   private serializeBasic = (value: any) => {
-    switch (this.schema!.type) {
+    switch (this.schema.type) {
+      case 'byte':
+        return value
       case 'array':
         return serializeArray(value)
       case 'fixvec':
@@ -155,26 +176,28 @@ class Molecule {
   }
 
   private normalize = (copied: any) => {
-    switch (this.schema!.type) {
+    switch (this.schema.type) {
+      case 'byte':
+        return copied
       case 'array':
       case 'fixvec':
       case 'dynvec':
         return copied.map((item: any) => {
-          const s = new Molecule((this.schema as any).item)
+          const s = new Molecule((this.schema as ArraySchema | FixvecSchema | DynvecSchema).item)
           return s.serialize(item)
         })
       case 'option':
-        return new Molecule((this.schema as any).item).serialize(copied)
+        return new Molecule(this.schema.item).serialize(copied)
       case 'union':
-        return [[copied[0], new Molecule((this.schema as any).items[copied[0]]).serialize(copied[1])]]
+        return [[copied[0], new Molecule(this.schema.items[copied[0]]).serialize(copied[1])]]
       case 'struct':
         return copied.map((item: any, index: number) => {
-          const s = new Molecule((this.schema as any).fields[index])
+          const s = new Molecule((this.schema as StructSchema).fields[index])
           return [item[0], s.serialize(item[1])]
         })
       case 'table':
         return copied.map((item: any, index: number) => {
-          const s = new Molecule((this.schema as any).fields[index])
+          const s = new Molecule((this.schema as TableSchema).fields[index])
           return [item[0], s.serialize(item[1])]
         })
       default:
@@ -183,9 +206,11 @@ class Molecule {
   }
 
   private deserializeBasic = (value: string) => {
-    switch (this.schema!.type) {
+    switch (this.schema.type) {
+      case 'byte':
+        return value
       case 'array':
-        return deserializeArray(value, (this.schema as ArraySchema)!.itemCount)
+        return deserializeArray(value, this.schema.itemCount)
       case 'fixvec':
         return deserializeFixvec(value)
       case 'dynvec':
@@ -202,12 +227,14 @@ class Molecule {
   }
 
   private isBasicSerialized = () => {
-    switch (this.schema!.type) {
+    switch (this.schema.type) {
+      case 'byte':
+        return true
       case 'array':
       case 'fixvec':
       case 'dynvec':
       case 'option':
-        return (this.schema as ArraySchema).item === ByteItem
+        return this.schema.item.type === ByteItem
       case 'union':
       case 'table':
       case 'struct':
@@ -219,7 +246,8 @@ class Molecule {
 
   private normalizeSerialized = (copied: string) => {
     console.log(copied)
-    switch (this.schema!.type) {
+    switch (this.schema.type) {
+      case 'byte':
       case 'array':
       case 'fixvec':
       case 'dynvec':
