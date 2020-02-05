@@ -2,6 +2,14 @@
   "serialize": [
     {
       "schema": {
+        "name": "byte",
+        "type": "byte"
+      },
+      "value": "0x02",
+      "expected": "0x02"
+    },
+    {
+      "schema": {
         "name": "array > array > array",
         "type": "array",
         "item": {
