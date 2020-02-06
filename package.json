@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "bin": {
+    "molecule-javascript": "./lib/cli.js"
+  },
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "25.1.1",
