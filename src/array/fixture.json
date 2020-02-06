@@ -20,45 +20,66 @@
   "deserialize": [
     {
       "source": {
-        "serialized": "0x010203",
-        "sizes": [1, 2]
+        "serialized": "0x0102",
+        "itemCount": 2
       },
-      "expected": ["0x01", "0x0203"]
+      "expected": ["0x01", "0x02"]
     },
     {
       "source": {
-        "serialized": "0x10203",
-        "sizes": [1, 2]
+        "serialized": "0x102",
+        "itemCount": 2
       },
-      "expected": ["0x01", "0x0203"]
+      "expected": ["0x01", "0x02"]
+    },
+    {
+      "source": {
+        "serialized": "0x",
+        "itemCount": 0
+      },
+      "expected": []
+    },
+    {
+      "source": {
+        "serialized": "0x",
+        "itemCount": 1
+      },
+      "exception": "0x cannot be deserialized by count 1"
+    },
+    {
+      "source": {
+        "serialized": "0x00",
+        "itemCount": 0
+      },
+      "exception": "0x00 cannot be deserialized by count 0"
+    },
+    {
+      "source": {
+        "serialized": "0x01",
+        "itemCount": 2
+      },
+      "exception": "0x01 cannot be deserialized by count 2"
     },
     {
       "source": {
         "serialized": "0x010203",
-        "sizes": [1, 3]
+        "itemCount": 2
       },
-      "exception": "Size exceeds the serialized data"
+      "exception": "0x010203 cannot be deserialized by count 2"
     },
     {
       "source": {
-        "serialized": "0x010203",
-        "sizes": []
+        "serialized": "0x0102",
+        "itemCount": -1
       },
-      "exception": "Expect sizes to be an array of size"
+      "exception": "Expect item count to a non-negative number"
     },
     {
       "source": {
-        "serialized": "0x010203",
-        "sizes": null
+        "serialized": "0x0102",
+        "itemCount": "1"
       },
-      "exception": "Expect sizes to be an array of size"
-    },
-    {
-      "source": {
-        "serialized": "0x010203",
-        "sizes": ["1", 2]
-      },
-      "exception": "Expect size to be a number"
+      "exception": "Expect item count to a non-negative number"
     }
   ]
 }

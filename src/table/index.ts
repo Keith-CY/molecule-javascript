@@ -1,7 +1,6 @@
-import { uint32Le, assertIsHexStr, littleHexToInt } from '../utils'
-import { deserializeArray } from '../array'
-
-const Uint32Length = 4
+import { uint32Le, assertIsHexStr } from '../utils'
+import { deserializeDynvec } from '../dynvec'
+import { HEADER_ELEMENT_SIZE } from '../utils/const'
 
 export const serializeTable = (origin: Array<TypeElement>): string => {
   let values = origin.map(item => item[1])
@@ -10,7 +9,7 @@ export const serializeTable = (origin: Array<TypeElement>): string => {
   })
   values = values.map(item => (item.length % 2 !== 0 ? `0${item.slice(2)}` : item.slice(2)))
 
-  const offsetsLength = (1 + values.length) * Uint32Length
+  const offsetsLength = (1 + values.length) * HEADER_ELEMENT_SIZE
   const valuesLength = values.map(value => value.length / 2).reduce((total, value) => total + value)
   const length = offsetsLength + valuesLength
   let result = uint32Le(`0x${length.toString(16)}`)
@@ -23,20 +22,10 @@ export const serializeTable = (origin: Array<TypeElement>): string => {
   return result
 }
 
-export const deserializeTable = (serialized: string, sizes: TypeSize[]) => {
+export const deserializeTable = (serialized: string, keys: string[]) => {
   assertIsHexStr(serialized)
-  const valuesLength = sizes.map(size => size[1]).reduce((total, value) => total + value)
-  const offsetsLength = (1 + sizes.length) * Uint32Length
-  const lengthHex = serialized.slice(0, 10)
-  if (littleHexToInt(lengthHex) !== valuesLength + offsetsLength) {
-    throw new Error(`Expect sum of size to be correct`)
-  }
-  const value = serialized.slice(2 + (1 + sizes.length) * 2 * Uint32Length)
-  const deserialized = deserializeArray(
-    `0x${value}`,
-    sizes.map(size => size[1]),
-  )
-  return sizes.map((size, idx) => [size[0], deserialized[idx]])
+  const deserialized = deserializeDynvec(serialized)
+  return keys.map((key, idx) => [key, deserialized[idx]])
 }
 
 export default { serializeTable, deserializeTable }

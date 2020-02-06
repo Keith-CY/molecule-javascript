@@ -1,4 +1,5 @@
 import { uint32Le, littleHexToInt, assertIsHexStr } from '../utils/index'
+import { HEADER_ELEMENT_SIZE } from '../utils/const'
 
 export const serializeFixvec = (fixvec: HexString[]) => {
   if (!Array.isArray(fixvec)) {
@@ -25,8 +26,7 @@ export const serializeFixvec = (fixvec: HexString[]) => {
 }
 
 export const deserializeFixvec = (serialized: HexString) => {
-  const HEADER_SIZE = 4
-  const PREFIX_SIZE = 2 + HEADER_SIZE * 2
+  const PREFIX_SIZE = 2 + HEADER_ELEMENT_SIZE * 2
   assertIsHexStr(serialized)
 
   const count = littleHexToInt(serialized.slice(0, PREFIX_SIZE))
