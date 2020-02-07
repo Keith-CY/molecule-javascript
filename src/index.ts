@@ -265,4 +265,6 @@ class Molecule {
   }
 }
 
+export { Molecule }
+
 export default Molecule

@@ -70,6 +70,7 @@ bower_components
 # Compiled binary addons (https://nodejs.org/api/addons.html)
 build/Release
 lib
+bin
 
 # Dependency directories
 node_modules/
@@ -81,6 +82,7 @@ typings/
 # TypeScript cache
 *.tsbuildinfo
 ./cache/*
+build
 
 # Optional npm cache directory
 .npm
