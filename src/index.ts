@@ -7,6 +7,7 @@ import { serializeUnion, deserializeUnion } from './union'
 import { serializeStruct, deserializeStruct } from './struct'
 import { littleHexToInt } from './utils'
 import { HEADER_ELEMENT_SIZE } from './utils/const'
+import { normalizeStruct } from './struct/utils'
 
 const SCHEMA_HAS_INVALID_TYPE = 'Schema has invalid type'
 
@@ -14,7 +15,7 @@ interface FieldBasis {
   name: string
 }
 interface StructBasis extends FieldBasis {
-  bytesize: number
+  byteLength: number
 }
 interface TableBasis extends FieldBasis {}
 
@@ -219,9 +220,10 @@ class Molecule {
       case 'union':
         return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE))])
       case 'struct':
+        this.setSchema(normalizeStruct(this.schema))
         return deserializeStruct(
           value,
-          this.schema.fields.map(field => [field.name, field.bytesize]),
+          this.schema.fields.map(field => [field.name, field.byteLength]),
         )
       case 'table':
         return deserializeTable(
@@ -242,7 +244,6 @@ class Molecule {
       case 'fixvec':
       case 'dynvec':
         return deserialized.map((value: string) => new Molecule((this.schema as DynvecSchema).item).deserialize(value))
-
       case 'union':
         return [
           [deserialized[0][0], new Molecule(this.schema.items[deserialized[0][0]]).deserialize(deserialized[0][1])],
