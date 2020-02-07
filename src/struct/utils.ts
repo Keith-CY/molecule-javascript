@@ -45,9 +45,6 @@ const computeByteLength = (field: StructField): number => {
 }
 
 const assignByteLength = (field: StructField) => {
-  if (!nameLengthPair) {
-    throw new Error('Schema name and length pair must be not null')
-  }
   let pairObject
   if (field.type === 'byte') {
     pairObject = nameLengthPair.find(pair => pair.name === field.type) as { name: string; byteLength: number }
