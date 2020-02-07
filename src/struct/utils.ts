@@ -26,19 +26,25 @@ const nameLengthPair: { name: string; byteLength: number }[] = []
 const computeByteLength = (field: StructField): number => {
   if (field.type === 'byte') {
     const byteLength = 1
-    nameLengthPair.push({ name: field.type, byteLength })
+    if (nameLengthPair.findIndex(pair => pair.name === field.type) < 0) {
+      nameLengthPair.push({ name: field.type, byteLength })
+    }
     return byteLength
   }
   if (field.type === 'array') {
     const byteLength = (field as ArrayType).itemCount * computeByteLength((field as ArrayType).item)
-    nameLengthPair.push({ name: field.name, byteLength })
+    if (nameLengthPair.findIndex(pair => pair.name === field.name) < 0) {
+      nameLengthPair.push({ name: field.name, byteLength })
+    }
     return byteLength
   }
   if (field.type === 'struct') {
     const byteLength = (field as StructType).fields
       .map((sub: StructField) => computeByteLength(sub))
       .reduce((previous, current) => previous + current)
-    nameLengthPair.push({ name: field.name, byteLength })
+    if (nameLengthPair.findIndex(pair => pair.name === field.name) < 0) {
+      nameLengthPair.push({ name: field.name, byteLength })
+    }
     return byteLength
   }
   return 1

@@ -133,11 +133,11 @@
         "type": "struct",
         "fields": [
           {
-            "name": "struct",
+            "name": "struct > [array, byte]",
             "type": "struct",
             "fields": [
               {
-                "name": "array > byte",
+                "name": "array > 3byte",
                 "type": "array",
                 "item": {
                   "type": "byte"
@@ -151,7 +151,7 @@
             ]
           },
           {
-            "name": "array",
+            "name": "array > 2byte",
             "type": "array",
             "item": {
               "type": "byte"
@@ -163,26 +163,26 @@
       "value": "0x010203011234",
       "expected": [
         [
-          "struct",
+          "struct > [array, byte]",
           [
-            ["array > byte", ["0x01", "0x02", "0x03"]],
+            ["array > 3byte", ["0x01", "0x02", "0x03"]],
             ["byte", "0x01"]
           ]
         ],
-        ["array", ["0x12", "0x34"]]
+        ["array > 2byte", ["0x12", "0x34"]]
       ]
     },
     {
       "schema": {
-        "name": "table >[struct -> [[array, byte], array > byte], dynvec] ",
+        "name": "table >[struct > [[array, byte], array > byte], dynvec] ",
         "type": "table",
         "fields": [
           {
-            "name": "struct",
+            "name": "struct > [[array, byte], array > byte]",
             "type": "struct",
             "fields": [
               {
-                "name": "array > byte",
+                "name": "array > 3byte",
                 "type": "array",
                 "item": {
                   "type": "byte"
@@ -204,9 +204,9 @@
       "value": "0x440000000c000000100000000102030134000000180000001e00000022000000280000002d00000002000000123400000000020000000567010000008903000000abcdef",
       "expected": [
         [
-          "struct",
+          "struct > [[array, byte], array > byte]",
           [
-            ["array > byte", ["0x01", "0x02", "0x03"]],
+            ["array > 3byte", ["0x01", "0x02", "0x03"]],
             ["byte", "0x01"]
           ]
         ],
