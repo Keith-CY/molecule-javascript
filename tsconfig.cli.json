@@ -3,10 +3,10 @@
     "incremental": true,
     "target": "es5",
     "module": "commonjs",
-    "declaration": true,
-    "declarationMap": true,
-    "sourceMap": true,
-    "outDir": "./build",
+    "declaration": false,
+    "declarationMap": false,
+    "sourceMap": false,
+    "outDir": "./bin",
     "rootDir": "./src",
     "tsBuildInfoFile": "./build.tsbuildinfo",
     "removeComments": true,
@@ -22,6 +22,6 @@
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true
   },
-  "include": ["src/**/*", "types"],
+  "files": ["src/cli.ts"],
   "exclude": ["node_modules"]
 }
