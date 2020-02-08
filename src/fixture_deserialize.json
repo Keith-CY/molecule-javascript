@@ -129,7 +129,7 @@
     },
     {
       "schema": {
-        "name": "struct > [struct > [array, byte], array > byte]",
+        "name": "struct > [struct, array]",
         "type": "struct",
         "fields": [
           {
@@ -137,7 +137,7 @@
             "type": "struct",
             "fields": [
               {
-                "name": "array > 3byte",
+                "name": "array",
                 "type": "array",
                 "item": {
                   "type": "byte"
@@ -151,7 +151,7 @@
             ]
           },
           {
-            "name": "array > 2byte",
+            "name": "array",
             "type": "array",
             "item": {
               "type": "byte"
@@ -165,11 +165,11 @@
         [
           "struct > [array, byte]",
           [
-            ["array > 3byte", ["0x01", "0x02", "0x03"]],
+            ["array", ["0x01", "0x02", "0x03"]],
             ["byte", "0x01"]
           ]
         ],
-        ["array > 2byte", ["0x12", "0x34"]]
+        ["array", ["0x12", "0x34"]]
       ]
     },
     {
