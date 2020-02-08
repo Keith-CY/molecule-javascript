@@ -1,0 +1,89 @@
+{
+  "namespace": "types",
+  "imports": [
+    {
+      "name": "word.schema",
+      "paths": ["nested"],
+      "path_supers": 1
+    },
+    {
+      "name": "word2.schema",
+      "paths": ["nested"],
+      "path_supers": 1
+    },
+    {
+      "name": "word3.schema",
+      "paths": ["nested"],
+      "path_supers": 1
+    }
+  ],
+  "declarations": [
+    {
+      "name": "Byte",
+      "type": "byte"
+    },
+    {
+      "name": "Struct1",
+      "type": "struct",
+      "fields": [
+        {
+          "name": "word1",
+          "type": "Word"
+        },
+        {
+          "name": "word2",
+          "type": "Word2"
+        },
+        {
+          "name": "word3",
+          "type": "Word3"
+        }
+      ],
+      "imported_depth": 1
+    },
+    {
+      "name": "Word10",
+      "type": "array",
+      "item": "Word",
+      "item_count": 10
+    },
+    {
+      "name": "Bytes",
+      "type": "fixvec",
+      "item": "Word"
+    },
+    {
+      "name": "BytesVec",
+      "type": "dynvec",
+      "item": "Bytes"
+    },
+    {
+      "name": "ByteOpt",
+      "type": "option",
+      "item": "Word"
+    },
+    {
+      "name": "Table1",
+      "type": "table",
+      "fields": [
+        {
+          "name": "f1",
+          "type": "Bytes"
+        },
+        {
+          "name": "f2",
+          "type": "byte"
+        },
+        {
+          "name": "f3",
+          "type": "ByteOpt"
+        }
+      ]
+    },
+    {
+      "type": "union",
+      "name": "UnionA",
+      "items": ["Bytes", "Struct1", "byte", "Table1"]
+    }
+  ]
+}

@@ -1,0 +1,188 @@
+{
+  "namespace": "types",
+  "declarations": [
+    {
+      "name": "Byte",
+      "type": "byte"
+    },
+    {
+      "name": "Struct1",
+      "type": "struct",
+      "fields": [
+        {
+          "name": "Word",
+          "type": "array",
+          "itemCount": 1
+        },
+        {
+          "name": "Word2",
+          "type": "array",
+          "itemCount": 2,
+          "item": {
+            "name": "Word",
+            "type": "array",
+            "itemCount": 1
+          }
+        },
+        {
+          "name": "Word3",
+          "type": "array",
+          "itemCount": 3,
+          "item": {
+            "name": "Word",
+            "type": "array",
+            "itemCount": 1
+          }
+        }
+      ],
+      "imported_depth": 1
+    },
+    {
+      "name": "Word10",
+      "type": "array",
+      "itemCount": 10,
+      "item": {
+        "name": "Word",
+        "type": "array",
+        "itemCount": 1
+      }
+    },
+    {
+      "name": "Bytes",
+      "type": "fixvec",
+      "item": {
+        "name": "Word",
+        "type": "array",
+        "itemCount": 1
+      }
+    },
+    {
+      "name": "BytesVec",
+      "type": "dynvec",
+      "item": {
+        "name": "Bytes",
+        "type": "fixvec",
+        "item": {
+          "name": "Word",
+          "type": "array",
+          "itemCount": 1
+        }
+      }
+    },
+    {
+      "name": "ByteOpt",
+      "type": "option",
+      "item": {
+        "name": "Word",
+        "type": "array",
+        "itemCount": 1
+      }
+    },
+    {
+      "name": "Table1",
+      "type": "table",
+      "fields": [
+        {
+          "name": "Bytes",
+          "type": "fixvec",
+          "item": {
+            "name": "Word",
+            "type": "array",
+            "itemCount": 1
+          }
+        },
+        {
+          "name": "f2",
+          "type": "byte"
+        },
+        {
+          "name": "ByteOpt",
+          "type": "option",
+          "item": {
+            "name": "Word",
+            "type": "array",
+            "itemCount": 1
+          }
+        }
+      ]
+    },
+    {
+      "type": "union",
+      "name": "UnionA",
+      "items": [
+        {
+          "name": "Bytes",
+          "type": "fixvec",
+          "item": {
+            "name": "Word",
+            "type": "array",
+            "itemCount": 1
+          }
+        },
+        {
+          "name": "Struct1",
+          "type": "struct",
+          "fields": [
+            {
+              "name": "Word",
+              "type": "array",
+              "itemCount": 1
+            },
+            {
+              "name": "Word2",
+              "type": "array",
+              "itemCount": 2,
+              "item": {
+                "name": "Word",
+                "type": "array",
+                "itemCount": 1
+              }
+            },
+            {
+              "name": "Word3",
+              "type": "array",
+              "itemCount": 3,
+              "item": {
+                "name": "Word",
+                "type": "array",
+                "itemCount": 1
+              }
+            }
+          ],
+          "imported_depth": 1
+        },
+        {
+          "type": "byte"
+        },
+        {
+          "name": "Table1",
+          "type": "table",
+          "fields": [
+            {
+              "name": "Bytes",
+              "type": "fixvec",
+              "item": {
+                "name": "Word",
+                "type": "array",
+                "itemCount": 1
+              }
+            },
+            {
+              "name": "f2",
+              "type": "byte"
+            },
+            {
+              "name": "ByteOpt",
+              "type": "option",
+              "item": {
+                "name": "Word",
+                "type": "array",
+                "itemCount": 1
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

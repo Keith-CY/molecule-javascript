@@ -1,0 +1,10 @@
+{
+  "namespace": "word",
+  "declarations": [
+    {
+      "name": "Word",
+      "type": "array",
+      "item_count": 1
+    }
+  ]
+}
