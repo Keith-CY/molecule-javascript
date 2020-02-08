@@ -26,7 +26,7 @@ interface StructType {
   byteLength: number
 }
 
-class StrcutUtils {
+class StructUtils {
   private aliasLengthPair: { alias: string; byteLength: number }[] = []
 
   private generateAlias = (field: StructField) => {
@@ -110,10 +110,10 @@ class StrcutUtils {
 
 export const normalizeStruct = (schema: any) => {
   const struct: StructType = JSON.parse(JSON.stringify(schema))
-  const strcutUtils = new StrcutUtils()
-  strcutUtils.normalizeAlias(struct)
-  strcutUtils.computeByteLength(struct)
-  strcutUtils.assignByteLength(struct)
+  const structUtils = new StructUtils()
+  structUtils.normalizeAlias(struct)
+  structUtils.computeByteLength(struct)
+  structUtils.assignByteLength(struct)
   return struct
 }
 
