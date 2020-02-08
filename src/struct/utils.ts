@@ -106,10 +106,6 @@ class StrcutUtils {
         break
     }
   }
-
-  public clearCache = () => {
-    this.aliasLengthPair = []
-  }
 }
 
 export const normalizeStruct = (schema: any) => {
@@ -118,7 +114,6 @@ export const normalizeStruct = (schema: any) => {
   strcutUtils.normalizeAlias(struct)
   strcutUtils.computeByteLength(struct)
   strcutUtils.assignByteLength(struct)
-  strcutUtils.clearCache()
   return struct
 }
 
