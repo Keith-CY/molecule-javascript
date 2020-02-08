@@ -52,57 +52,58 @@ class StrcutUtils {
     this.generateAlias(field)
   }
 
+  private addPair = (field: StructField, byteLength: number) => {
+    if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
+      this.aliasLengthPair.push({ alias: field.alias, byteLength })
+    }
+  }
+
   public computeByteLength = (field: StructField): number => {
-    if (field.type === 'byte') {
-      const byteLength = 1
-      if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-        this.aliasLengthPair.push({ alias: field.alias, byteLength })
-      }
-      return byteLength
+    let byteLength = 1
+    switch (field.type) {
+      case 'byte':
+        byteLength = 1
+        this.addPair(field, byteLength)
+        return byteLength
+      case 'array':
+        byteLength = (field as ArrayType).itemCount * this.computeByteLength((field as ArrayType).item)
+        this.addPair(field, byteLength)
+        return byteLength
+      case 'struct':
+        byteLength = (field as StructType).fields
+          .map((sub: StructField) => this.computeByteLength(sub))
+          .reduce((previous, current) => previous + current)
+        this.addPair(field, byteLength)
+        return byteLength
+      default:
+        return byteLength
     }
-    if (field.type === 'array') {
-      const byteLength = (field as ArrayType).itemCount * this.computeByteLength((field as ArrayType).item)
-      if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-        this.aliasLengthPair.push({ alias: field.alias, byteLength })
-      }
-      return byteLength
+  }
+
+  private findPair = (field: StructField): { alias: string; byteLength: number } => {
+    return this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
+      alias: string
+      byteLength: number
     }
-    if (field.type === 'struct') {
-      const byteLength = (field as StructType).fields
-        .map((sub: StructField) => this.computeByteLength(sub))
-        .reduce((previous, current) => previous + current)
-      if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-        this.aliasLengthPair.push({ alias: field.alias, byteLength })
-      }
-      return byteLength
-    }
-    return 1
   }
 
   public assignByteLength = (field: StructField) => {
-    let pairObject
-    if (field.type === 'byte') {
-      pairObject = this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
-        alias: string
-        byteLength: number
-      }
-      field.byteLength = pairObject.byteLength
-    } else if (field.type === 'array') {
-      pairObject = this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
-        alias: string
-        byteLength: number
-      }
-      field.byteLength = pairObject.byteLength
-      this.assignByteLength((field as ArrayType).item)
-    } else if (field.type === 'struct') {
-      pairObject = this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
-        alias: string
-        byteLength: number
-      }
-      field.byteLength = pairObject.byteLength
-      ;(field as StructType).fields.forEach((sub: StructField) => {
-        this.assignByteLength(sub)
-      })
+    switch (field.type) {
+      case 'byte':
+        field.byteLength = this.findPair(field).byteLength
+        break
+      case 'array':
+        field.byteLength = this.findPair(field).byteLength
+        this.assignByteLength((field as ArrayType).item)
+        break
+      case 'struct':
+        field.byteLength = this.findPair(field).byteLength
+        ;(field as StructType).fields.forEach((sub: StructField) => {
+          this.assignByteLength(sub)
+        })
+        break
+      default:
+        break
     }
   }
 
