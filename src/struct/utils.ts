@@ -49,7 +49,7 @@ const normalizeAlias = (field: StructField) => {
   generateAlias(field)
 }
 
-const aliasLengthPair: { alias: string; byteLength: number }[] = []
+let aliasLengthPair: { alias: string; byteLength: number }[] = []
 const computeByteLength = (field: StructField): number => {
   if (field.type === 'byte') {
     const byteLength = 1
@@ -100,6 +100,7 @@ export const normalizeStruct = (schema: any) => {
   normalizeAlias(struct)
   computeByteLength(struct)
   assignByteLength(struct)
+  aliasLengthPair = []
   return struct
 }
 
