@@ -5,7 +5,7 @@ import fs from 'fs'
 const [, , ...args] = process.argv
 
 const schemaOrPath = args[0]
-const outputFile = args[1]
+const outputFile = args[1] || ''
 
 const handleSchema = () => {
   try {
@@ -24,16 +24,20 @@ normalizedSchema.declarations.forEach(declaration => {
 })
 module.exports = { normalizedSchema, molecules }
 `
-    fs.writeFileSync(outputFile, script)
-    console.info(`Generator is generated at ${outputFile} successfully`)
+    if (outputFile) {
+      fs.writeFileSync(outputFile, script)
+      console.info(`Generator is generated at ${outputFile} successfully`)
+    } else {
+      console.info(script)
+    }
   } catch (err) {
     console.error(err)
     process.exit(1)
   }
 }
 
-if (!schemaOrPath || !outputFile) {
-  console.error('Please use command as molecule-javascript <schema | file path> outputFile')
+if (!schemaOrPath) {
+  console.error('Please use command as molecule-javascript <schema | file path> [outputFile]')
   process.exit(1)
 } else {
   handleSchema()
