@@ -334,12 +334,25 @@ intermediate for `bar/types.mol`
 
 ## Examples
 
+### Use in runtime
+
 ```js
 import Molecule from '@nervosnetwork/molecule-javascript'
 import schema from 'schema.json'
 import data from 'data'
 
 const molecule = new Molecule({ schema })
-const serialized = molecule.encode(data)
-const parsed = molecule.decode(serialized)
+const serialized = molecule.serialize(data)
+const parsed = molecule.serialize(serialized)
+```
+
+### Use as cli
+
+```sh
+molecule-javascript root/root.schema.json molecules.js
+```
+
+```js
+const { molecules } = require('./molecules.js')
+molecules.Bytes.serialize(['0x01', '0x02'])
 ```
