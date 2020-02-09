@@ -1,0 +1,11 @@
+{
+  "namespace": "types",
+  "imports": [],
+  "declarations": [
+    {
+      "name": "Words",
+
+      "type": "Word"
+    }
+  ]
+}

@@ -38,14 +38,9 @@ class Schema {
       throw new Error(`File ${filePath} doesn't exist`)
     }
     const jsonStr = fs.readFileSync(filePath, 'utf-8')
-    try {
-      const json = JSON.parse(jsonStr)
-      const schema = new Schema(json, undefined, filePath)
-      return schema
-    } catch (err) {
-      console.warn(err)
-      throw err
-    }
+    const json = JSON.parse(jsonStr)
+    const schema = new Schema(json, undefined, filePath)
+    return schema
   }
 
   constructor(
@@ -105,97 +100,92 @@ class Schema {
           typeof field === 'string' ? { type: field } : field,
         )
       }
-      try {
-        switch (declaration.type) {
-          case 'byte':
+      switch (declaration.type) {
+        case 'byte':
+          return declaration
+        case 'array': {
+          if (typeof declaration.item_count !== 'number') {
+            throw new Error('Expect item_count to be a number')
+          }
+          const { item_count: itemCount, item, ...rest } = declaration
+          const normalizedType = {
+            ...rest,
+            itemCount,
+          }
+          if (item) {
+            const tmp = new Schema(
+              {
+                namespace: declaration.name,
+                declarations: [item],
+              },
+              this.declarations,
+            ).getNormalizedSchema().declarations[0]
+            normalizedType.item = tmp
+          }
+          this.declarations.set(normalizedType.name, normalizedType)
+          return normalizedType
+        }
+        case 'option':
+        case 'fixvec':
+        case 'dynvec': {
+          const normalizedType = {
+            ...declaration,
+            item: new Schema(
+              { namespace: declaration.name, declarations: [declaration.item] },
+              this.declarations,
+            ).getNormalizedSchema().declarations[0],
+          }
+          this.declarations.set(normalizedType.name, normalizedType)
+          return normalizedType
+        }
+        case 'union': {
+          if (!declaration.items) {
             return declaration
-          case 'array': {
-            if (typeof declaration.item_count !== 'number') {
-              throw new Error('Expect item_count to be a number')
-            }
-            const { item_count: itemCount, item, ...rest } = declaration
-            const normalizedType = {
-              ...rest,
-              itemCount,
-            }
-            if (item) {
-              const tmp = new Schema(
+          }
+          const normalizedType = {
+            ...declaration,
+            items: declaration.items.map((item: any) => {
+              const res = new Schema(
                 {
                   namespace: declaration.name,
                   declarations: [item],
                 },
                 this.declarations,
-              ).getNormalizedSchema().declarations[0]
-              normalizedType.item = tmp
-            }
-            this.declarations.set(normalizedType.name, normalizedType)
-            return normalizedType
+              ).getNormalizedSchema()
+              return res.declarations[0]
+            }),
           }
-          case 'option':
-          case 'fixvec':
-          case 'dynvec': {
-            const normalizedType = {
-              ...declaration,
-              item: new Schema(
-                { namespace: declaration.name, declarations: [declaration.item] },
-                this.declarations,
-              ).getNormalizedSchema().declarations[0],
-            }
-            this.declarations.set(normalizedType.name, normalizedType)
-            return normalizedType
-          }
-          case 'union': {
-            if (!declaration.items) {
-              return declaration
-            }
-            const normalizedType = {
-              ...declaration,
-              items: declaration.items.map((item: any) => {
-                const res = new Schema(
-                  {
-                    namespace: declaration.name,
-                    declarations: [item],
-                  },
-                  this.declarations,
-                ).getNormalizedSchema()
-                return res.declarations[0]
-              }),
-            }
-            this.declarations.set(normalizedType.name, normalizedType)
-            return normalizedType
-          }
-          case 'struct':
-          case 'table': {
-            if (!declaration.fields) {
-              return declaration
-            }
-            const normalizedType = {
-              ...declaration,
-              fields: declaration.fields.map((field: any) => {
-                const res = new Schema(
-                  {
-                    namespace: declaration.name,
-                    declarations: [field],
-                  },
-                  this.declarations,
-                ).getNormalizedSchema()
-                return res.declarations[0]
-              }),
-            }
-            this.declarations.set(normalizedType.name, normalizedType)
-            return normalizedType
-          }
-          default: {
-            const type = this.declarations.get(declaration.type)
-            if (type) {
-              return type
-            }
-            throw new Error(`Type ${declaration.type} is not declared`)
-          }
+          this.declarations.set(normalizedType.name, normalizedType)
+          return normalizedType
         }
-      } catch (err) {
-        console.error(err)
-        throw new Error(`[${declaration.name}: ${declaration.type}]: ${err}`)
+        case 'struct':
+        case 'table': {
+          if (!declaration.fields) {
+            return declaration
+          }
+          const normalizedType = {
+            ...declaration,
+            fields: declaration.fields.map((field: any) => {
+              const res = new Schema(
+                {
+                  namespace: declaration.name,
+                  declarations: [field],
+                },
+                this.declarations,
+              ).getNormalizedSchema()
+              return res.declarations[0]
+            }),
+          }
+          this.declarations.set(normalizedType.name, normalizedType)
+          return normalizedType
+        }
+        default: {
+          const type = this.declarations.get(declaration.type)
+          if (type) {
+            return type
+          }
+          throw new Error(`Type ${declaration.type} is not declared`)
+        }
       }
     })
     this.normalizedJson = normalizedJson
