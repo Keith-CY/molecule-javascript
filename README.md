@@ -350,6 +350,8 @@ const parsed = molecule.serialize(serialized)
 
 ```sh
 molecule-javascript root/root.schema.json molecules.js
+# or
+molecule-javascript '{"namespace": "bytes", "declarations": [ {"name": "Bytes", type: "fixvec", item: "byte" }]}' molecules.js
 ```
 
 ```js

@@ -9,8 +9,6 @@ import { littleHexToInt } from './utils'
 import { HEADER_ELEMENT_SIZE } from './utils/const'
 import { normalizeStruct } from './struct/utils'
 
-import SchemaPrecessor from './schema'
-
 const SCHEMA_HAS_INVALID_TYPE = 'Schema has invalid type'
 interface FieldBasis {
   name: string
@@ -267,6 +265,6 @@ class Molecule {
   }
 }
 
-export { Molecule, SchemaPrecessor }
+export { Molecule }
 
 export default Molecule

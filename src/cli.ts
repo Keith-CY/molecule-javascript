@@ -2,11 +2,9 @@
 /* eslint-disable no-console */
 import fs from 'fs'
 
-const info = (msg: string) => console.info(msg)
-const warn = (msg: string) => console.warn(msg)
 const [, , ...args] = process.argv
 
-const schemaFilePath = args[0]
+const schemaOrPath = args[0]
 const outputFile = args[1]
 
 const handleSchema = () => {
@@ -14,8 +12,12 @@ const handleSchema = () => {
     if (fs.existsSync(outputFile)) {
       fs.unlinkSync(outputFile)
     }
-    const script = `const { Molecule, SchemaPrecessor } = require('molecule-javascript')
-const normalizedSchema = SchemaPrecessor.fromFile('${schemaFilePath}').getNormalizedSchema()
+    const normalizeScript = fs.existsSync(schemaOrPath)
+      ? `const normalizedSchema = Schema.fromFile('${schemaOrPath}').getNormalizedSchema()`
+      : `const normalizedSchema = new Schema(${schemaOrPath}).getNormalizedSchema()`
+    const script = `const { Molecule } = require('molecule-javascript')
+const { Schema }  = require('molecule-javascript/lib/schema')
+${normalizeScript}
 const molecules = {}
 normalizedSchema.declarations.forEach(declaration => {
   molecules[declaration.name] = new Molecule(declaration)
@@ -23,14 +25,16 @@ normalizedSchema.declarations.forEach(declaration => {
 module.exports = { normalizedSchema, molecules }
 `
     fs.writeFileSync(outputFile, script)
-    info(`Generator is generated at ${outputFile} successfully`)
+    console.info(`Generator is generated at ${outputFile} successfully`)
   } catch (err) {
-    warn(err)
+    console.error(err)
+    process.exit(1)
   }
 }
 
-if (!schemaFilePath || !outputFile) {
-  warn('Please use command as molecule-javascript <schema file path> outputFile')
+if (!schemaOrPath || !outputFile) {
+  console.error('Please use command as molecule-javascript <schema | file path> outputFile')
+  process.exit(1)
 } else {
   handleSchema()
 }
