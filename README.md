@@ -343,7 +343,7 @@ import data from 'data'
 
 const molecule = new Molecule({ schema })
 const serialized = molecule.serialize(data)
-const parsed = molecule.serialize(serialized)
+const parsed = molecule.deserialize(serialized)
 ```
 
 ### Use as cli
