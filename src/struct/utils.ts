@@ -26,81 +26,94 @@ interface StructType {
   byteLength: number
 }
 
-const generateAlias = (field: StructField) => {
-  if (field.type === 'struct') {
-    const struct: StructType = field
-    for (const sub of struct.fields) {
-      sub.alias = `${sub.name ? sub.name : sub.type}-${field.alias}`
-      if (sub.type !== 'byte') {
-        generateAlias(sub)
+class StructUtils {
+  private aliasLengthPair: { alias: string; byteLength: number }[] = []
+
+  private generateAlias = (field: StructField) => {
+    if (field.type === 'struct') {
+      const struct: StructType = field
+      for (const sub of struct.fields) {
+        sub.alias = `${sub.name ? sub.name : sub.type}-${field.alias}`
+        if (sub.type !== 'byte') {
+          this.generateAlias(sub)
+        }
+      }
+    } else if (field.type === 'array') {
+      const array: ArrayType = field
+      array.item.alias = `${array.item.name ? array.item.name : array.item.type}-${array.alias}`
+      if (array.item.type !== 'byte') {
+        this.generateAlias(array.item)
       }
     }
-  } else if (field.type === 'array') {
-    const array: ArrayType = field
-    array.item.alias = `${array.item.name ? array.item.name : array.item.type}-${array.alias}`
-    if (array.item.type !== 'byte') {
-      generateAlias(array.item)
-    }
   }
-}
 
-const normalizeAlias = (field: StructField) => {
-  field.alias = field.type === 'byte' ? field.type : field.name
-  generateAlias(field)
-}
+  public normalizeAlias = (field: StructField) => {
+    field.alias = field.type === 'byte' ? field.type : field.name
+    this.generateAlias(field)
+  }
 
-let aliasLengthPair: { alias: string; byteLength: number }[] = []
-const computeByteLength = (field: StructField): number => {
-  if (field.type === 'byte') {
-    const byteLength = 1
-    if (aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-      aliasLengthPair.push({ alias: field.alias, byteLength })
+  private addPair = (field: StructField, byteLength: number) => {
+    if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
+      this.aliasLengthPair.push({ alias: field.alias, byteLength })
     }
-    return byteLength
   }
-  if (field.type === 'array') {
-    const byteLength = (field as ArrayType).itemCount * computeByteLength((field as ArrayType).item)
-    if (aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-      aliasLengthPair.push({ alias: field.alias, byteLength })
-    }
-    return byteLength
-  }
-  if (field.type === 'struct') {
-    const byteLength = (field as StructType).fields
-      .map((sub: StructField) => computeByteLength(sub))
-      .reduce((previous, current) => previous + current)
-    if (aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
-      aliasLengthPair.push({ alias: field.alias, byteLength })
-    }
-    return byteLength
-  }
-  return 1
-}
 
-const assignByteLength = (field: StructField) => {
-  let pairObject
-  if (field.type === 'byte') {
-    pairObject = aliasLengthPair.find(pair => pair.alias === field.alias) as { alias: string; byteLength: number }
-    field.byteLength = pairObject.byteLength
-  } else if (field.type === 'array') {
-    pairObject = aliasLengthPair.find(pair => pair.alias === field.alias) as { alias: string; byteLength: number }
-    field.byteLength = pairObject.byteLength
-    assignByteLength((field as ArrayType).item)
-  } else if (field.type === 'struct') {
-    pairObject = aliasLengthPair.find(pair => pair.alias === field.alias) as { alias: string; byteLength: number }
-    field.byteLength = pairObject.byteLength
-    ;(field as StructType).fields.forEach((sub: StructField) => {
-      assignByteLength(sub)
-    })
+  public computeByteLength = (field: StructField): number => {
+    let byteLength = 1
+    switch (field.type) {
+      case 'byte':
+        byteLength = 1
+        this.addPair(field, byteLength)
+        return byteLength
+      case 'array':
+        byteLength = (field as ArrayType).itemCount * this.computeByteLength((field as ArrayType).item)
+        this.addPair(field, byteLength)
+        return byteLength
+      case 'struct':
+        byteLength = (field as StructType).fields
+          .map((sub: StructField) => this.computeByteLength(sub))
+          .reduce((previous, current) => previous + current)
+        this.addPair(field, byteLength)
+        return byteLength
+      default:
+        return byteLength
+    }
+  }
+
+  private findPair = (field: StructField): { alias: string; byteLength: number } => {
+    return this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
+      alias: string
+      byteLength: number
+    }
+  }
+
+  public assignByteLength = (field: StructField) => {
+    switch (field.type) {
+      case 'byte':
+        field.byteLength = this.findPair(field).byteLength
+        break
+      case 'array':
+        field.byteLength = this.findPair(field).byteLength
+        this.assignByteLength((field as ArrayType).item)
+        break
+      case 'struct':
+        field.byteLength = this.findPair(field).byteLength
+        ;(field as StructType).fields.forEach((sub: StructField) => {
+          this.assignByteLength(sub)
+        })
+        break
+      default:
+        break
+    }
   }
 }
 
 export const normalizeStruct = (schema: any) => {
   const struct: StructType = JSON.parse(JSON.stringify(schema))
-  normalizeAlias(struct)
-  computeByteLength(struct)
-  assignByteLength(struct)
-  aliasLengthPair = []
+  const structUtils = new StructUtils()
+  structUtils.normalizeAlias(struct)
+  structUtils.computeByteLength(struct)
+  structUtils.assignByteLength(struct)
   return struct
 }
 
