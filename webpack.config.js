@@ -1,8 +1,12 @@
 const path = require('path')
 
 module.exports = {
+  target: 'node',
   mode: 'production',
-  entry: './src/index.ts',
+  entry: {
+    index: './src/index.ts',
+    schema: './src/schema/index.ts',
+  },
   module: {
     rules: [
       {
@@ -16,7 +20,7 @@ module.exports = {
     extensions: ['.ts'],
   },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'lib'),
     libraryTarget: 'umd',
     library: 'MoleculeJavaScript',

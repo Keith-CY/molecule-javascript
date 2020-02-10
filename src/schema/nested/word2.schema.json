@@ -1,0 +1,18 @@
+{
+  "namespace": "word2",
+  "imports": [
+    {
+      "name": "word.schema",
+      "paths": [],
+      "super_paths": 0
+    }
+  ],
+  "declarations": [
+    {
+      "name": "Word2",
+      "type": "array",
+      "item": "Word",
+      "item_count": 2
+    }
+  ]
+}
