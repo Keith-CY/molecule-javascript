@@ -78,7 +78,7 @@ class Molecule {
   private schema!: Schema
 
   constructor(schema: Schema) {
-    this.setSchema(schema || { type: 'byte' })
+    this.setSchema(schema)
   }
 
   public static getBasicTypes = () => {
@@ -89,7 +89,7 @@ class Molecule {
     return this.schema
   }
 
-  public setSchema = (schema: Schema) => {
+  public setSchema = (schema: Schema = { type: 'byte' }) => {
     this.validateSchema(schema)
     this.schema = schema
   }
@@ -114,9 +114,6 @@ class Molecule {
   }
 
   private validateSchema = (schema: Schema) => {
-    if (!schema) {
-      throw new Error('Schema is required')
-    }
     if (typeof schema !== 'object') {
       throw new Error('Schema is invalid')
     }

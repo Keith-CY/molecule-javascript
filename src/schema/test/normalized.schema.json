@@ -38,6 +38,11 @@
       "imported_depth": 1
     },
     {
+      "name": "Default Struct",
+      "type": "struct",
+      "fields": []
+    },
+    {
       "name": "Word10",
       "type": "array",
       "itemCount": 10,
@@ -105,6 +110,11 @@
           }
         }
       ]
+    },
+    {
+      "name": "Default Table",
+      "type": "table",
+      "fields": []
     },
     {
       "type": "union",
@@ -183,6 +193,11 @@
           ]
         }
       ]
+    },
+    {
+      "name": "Default Union",
+      "type": "union",
+      "items": []
     }
   ]
 }
