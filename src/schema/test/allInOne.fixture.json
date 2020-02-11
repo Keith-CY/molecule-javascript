@@ -1,0 +1,1792 @@
+{
+  "schema": {
+    "namespace": "schema",
+    "declarations": [
+      { "name": "Byte2", "type": "array", "item_count": 2 },
+      { "name": "Byte3", "type": "array", "item_count": 3 },
+      { "name": "Byte4", "type": "array", "item_count": 4 },
+      { "name": "Byte5", "type": "array", "item_count": 5 },
+      { "name": "Byte6", "type": "array", "item_count": 6 },
+      { "name": "Byte7", "type": "array", "item_count": 7 },
+      { "name": "Byte8", "type": "array", "item_count": 8 },
+      { "name": "Byte9", "type": "array", "item_count": 9 },
+      { "name": "Byte10", "type": "array", "item_count": 10 },
+      { "name": "Byte11", "type": "array", "item_count": 11 },
+      { "name": "Byte12", "type": "array", "item_count": 12 },
+      { "name": "Byte13", "type": "array", "item_count": 13 },
+      { "name": "Byte14", "type": "array", "item_count": 14 },
+      { "name": "Byte15", "type": "array", "item_count": 15 },
+      { "name": "Byte16", "type": "array", "item_count": 16 },
+      { "name": "Word", "type": "array", "item_count": 2 },
+      { "name": "Word2", "type": "array", "item_count": 2 },
+      { "name": "Word3", "type": "array", "item_count": 3 },
+      { "name": "Word4", "type": "array", "item_count": 4 },
+      { "name": "Word5", "type": "array", "item_count": 5 },
+      { "name": "Word6", "type": "array", "item_count": 6 },
+      { "name": "Word7", "type": "array", "item_count": 7 },
+      { "name": "Word8", "type": "array", "item_count": 8 },
+      { "name": "Byte3x3", "type": "array", "item_count": 3 },
+      { "name": "Byte5x3", "type": "array", "item_count": 3 },
+      { "name": "Byte7x3", "type": "array", "item_count": 3 },
+      { "name": "Byte9x3", "type": "array", "item_count": 3 },
+      {
+        "name": "StructA",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Byte2" }
+        ]
+      },
+      {
+        "name": "StructB",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Byte3" }
+        ]
+      },
+      {
+        "name": "StructC",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Byte4" }
+        ]
+      },
+      {
+        "name": "StructD",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Byte5" }
+        ]
+      },
+      {
+        "name": "StructE",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Byte2" },
+          { "name": "f3", "type": "byte" },
+          { "name": "f4", "type": "Byte2" }
+        ]
+      },
+      {
+        "name": "StructF",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Byte3" },
+          { "name": "f3", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructG",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "Byte3" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Word2" }
+        ]
+      },
+      {
+        "name": "StructH",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "Byte3" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "Byte2" },
+          { "name": "f4", "type": "Byte4" }
+        ]
+      },
+      {
+        "name": "StructI",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "Byte3" },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructJ",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "Byte6" },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructIx3",
+        "type": "array",
+        "item": "StructI",
+        "item_count": 3
+      },
+      {
+        "name": "StructO",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "StructIx3" },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructP",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "StructJ" },
+          { "name": "f1", "type": "byte" }
+        ]
+      },
+      { "name": "Bytes", "type": "fixvec", "item": "byte" },
+      { "name": "Words", "type": "fixvec", "item": "Word" },
+      { "name": "Byte3Vec", "type": "fixvec", "item": "Byte3" },
+      { "name": "Byte7Vec", "type": "fixvec", "item": "Byte7" },
+      { "name": "StructIVec", "type": "fixvec", "item": "StructI" },
+      { "name": "StructJVec", "type": "fixvec", "item": "StructJ" },
+      { "name": "StructPVec", "type": "fixvec", "item": "StructP" },
+      { "name": "BytesVec", "type": "dynvec", "item": "Bytes" },
+      { "name": "WordsVec", "type": "dynvec", "item": "Words" },
+      { "name": "Table0", "type": "table" },
+      { "name": "Table1", "type": "table", "fields": [{ "name": "f1", "type": "byte" }] },
+      {
+        "name": "Table2",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Word2" }
+        ]
+      },
+      {
+        "name": "Table3",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Word2" },
+          { "name": "f3", "type": "StructA" }
+        ]
+      },
+      {
+        "name": "Table4",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Word2" },
+          { "name": "f3", "type": "StructA" },
+          { "name": "f4", "type": "Bytes" }
+        ]
+      },
+      {
+        "name": "Table5",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Word2" },
+          { "name": "f3", "type": "StructA" },
+          { "name": "f4", "type": "Bytes" },
+          { "name": "f5", "type": "BytesVec" }
+        ]
+      },
+      {
+        "name": "Table6",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "Word2" },
+          { "name": "f3", "type": "StructA" },
+          { "name": "f4", "type": "Bytes" },
+          { "name": "f5", "type": "BytesVec" },
+          { "name": "f6", "type": "Table5" }
+        ]
+      },
+      { "name": "ByteOpt", "type": "option", "item": "byte" },
+      { "name": "WordOpt", "type": "option", "item": "Word" },
+      { "name": "StructAOpt", "type": "option", "item": "StructA" },
+      { "name": "StructPOpt", "type": "option", "item": "StructP" },
+      { "name": "BytesOpt", "type": "option", "item": "Bytes" },
+      { "name": "WordsOpt", "type": "option", "item": "Words" },
+      { "name": "BytesVecOpt", "type": "option", "item": "BytesVec" },
+      { "name": "WordsVecOpt", "type": "option", "item": "WordsVec" },
+      { "name": "Table0Opt", "type": "option", "item": "Table0" },
+      { "name": "Table6Opt", "type": "option", "item": "Table6" },
+      { "name": "Table6OptOpt", "type": "option", "item": "Table6Opt" },
+
+      { "name": "ByteOptVec", "type": "dynvec", "item": "ByteOpt" },
+      { "name": "WordOptVec", "type": "dynvec", "item": "WordOpt" },
+      { "name": "WordsOptVec", "type": "dynvec", "item": "WordsOpt" },
+      { "name": "BytesOptVec", "type": "dynvec", "item": "BytesOpt" },
+
+      {
+        "name": "UnionA",
+        "type": "union",
+        "items": ["byte", "Word", "StructA", "Bytes", "Words", "Table0", "Table6", "Table6Opt"]
+      },
+
+      {
+        "name": "TableA",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "Word2" },
+          { "name": "f2", "type": "StructA" },
+          { "name": "f3", "type": "Bytes" },
+          { "name": "f4", "type": "BytesVec" },
+          { "name": "f5", "type": "Table1" },
+          { "name": "f6", "type": "BytesOpt" },
+          { "name": "f7", "type": "UnionA" },
+          { "name": "f8", "type": "byte" }
+        ]
+      },
+
+      {
+        "name": "AllInOne",
+        "type": "table",
+        "fields": [
+          { "name": "f0", "type": "byte" },
+          { "name": "f1", "type": "Byte2" },
+          { "name": "f2", "type": "Byte3" },
+          { "name": "f3", "type": "Byte4" },
+          { "name": "f4", "type": "Byte5" },
+          { "name": "f5", "type": "Byte6" },
+          { "name": "f6", "type": "Byte7" },
+          { "name": "f7", "type": "Byte8" },
+          { "name": "f8", "type": "Byte9" },
+          { "name": "f9", "type": "Byte10" },
+          { "name": "f10", "type": "Byte11" },
+          { "name": "f11", "type": "Byte12" },
+          { "name": "f12", "type": "Byte13" },
+          { "name": "f13", "type": "Byte14" },
+          { "name": "f14", "type": "Byte15" },
+          { "name": "f15", "type": "Byte16" },
+          { "name": "f16", "type": "Word" },
+          { "name": "f17", "type": "Word2" },
+          { "name": "f18", "type": "Word3" },
+          { "name": "f19", "type": "Word4" },
+          { "name": "f20", "type": "Word5" },
+          { "name": "f21", "type": "Word6" },
+          { "name": "f22", "type": "Word7" },
+          { "name": "f23", "type": "Word8" },
+          { "name": "f24", "type": "Byte3x3" },
+          { "name": "f25", "type": "Byte5x3" },
+          { "name": "f26", "type": "Byte7x3" },
+          { "name": "f27", "type": "Byte9x3" },
+          { "name": "f28", "type": "StructA" },
+          { "name": "f29", "type": "StructB" },
+          { "name": "f30", "type": "StructC" },
+          { "name": "f31", "type": "StructD" },
+          { "name": "f32", "type": "StructE" },
+          { "name": "f33", "type": "StructF" },
+          { "name": "f34", "type": "StructG" },
+          { "name": "f35", "type": "StructH" },
+          { "name": "f36", "type": "StructI" },
+          { "name": "f37", "type": "StructJ" },
+          { "name": "f38", "type": "StructIx3" },
+          { "name": "f39", "type": "StructO" },
+          { "name": "f40", "type": "StructP" },
+          { "name": "f41", "type": "Bytes" },
+          { "name": "f42", "type": "Words" },
+          { "name": "f43", "type": "Byte3Vec" },
+          { "name": "f44", "type": "Byte7Vec" },
+          { "name": "f45", "type": "StructIVec" },
+          { "name": "f46", "type": "StructJVec" },
+          { "name": "f47", "type": "StructPVec" },
+          { "name": "f48", "type": "BytesVec" },
+          { "name": "f49", "type": "WordsVec" },
+          { "name": "f50", "type": "Table0" },
+          { "name": "f51", "type": "Table1" },
+          { "name": "f52", "type": "Table2" },
+          { "name": "f53", "type": "Table3" },
+          { "name": "f54", "type": "Table4" },
+          { "name": "f55", "type": "Table5" },
+          { "name": "f56", "type": "Table6" },
+          { "name": "f57", "type": "ByteOpt" },
+          { "name": "f58", "type": "WordOpt" },
+          { "name": "f59", "type": "StructAOpt" },
+          { "name": "f60", "type": "StructPOpt" },
+          { "name": "f61", "type": "BytesOpt" },
+          { "name": "f62", "type": "WordsOpt" },
+          { "name": "f63", "type": "BytesVecOpt" },
+          { "name": "f64", "type": "WordsVecOpt" },
+          { "name": "f65", "type": "Table0Opt" },
+          { "name": "f66", "type": "Table6Opt" },
+          { "name": "f67", "type": "Table6OptOpt" },
+          { "name": "f68", "type": "ByteOptVec" },
+          { "name": "f69", "type": "WordOptVec" },
+          { "name": "f70", "type": "WordsOptVec" },
+          { "name": "f71", "type": "BytesOptVec" },
+          { "name": "f72", "type": "UnionA" }
+        ]
+      }
+    ]
+  },
+
+  "expected": {
+    "namespace": "schema",
+    "declarations": [
+      { "name": "Byte2", "type": "array", "itemCount": 2 },
+      { "name": "Byte3", "type": "array", "itemCount": 3 },
+      { "name": "Byte4", "type": "array", "itemCount": 4 },
+      { "name": "Byte5", "type": "array", "itemCount": 5 },
+      { "name": "Byte6", "type": "array", "itemCount": 6 },
+      { "name": "Byte7", "type": "array", "itemCount": 7 },
+      { "name": "Byte8", "type": "array", "itemCount": 8 },
+      { "name": "Byte9", "type": "array", "itemCount": 9 },
+      { "name": "Byte10", "type": "array", "itemCount": 10 },
+      { "name": "Byte11", "type": "array", "itemCount": 11 },
+      { "name": "Byte12", "type": "array", "itemCount": 12 },
+      { "name": "Byte13", "type": "array", "itemCount": 13 },
+      { "name": "Byte14", "type": "array", "itemCount": 14 },
+      { "name": "Byte15", "type": "array", "itemCount": 15 },
+      { "name": "Byte16", "type": "array", "itemCount": 16 },
+      { "name": "Word", "type": "array", "itemCount": 2 },
+      { "name": "Word2", "type": "array", "itemCount": 2 },
+      { "name": "Word3", "type": "array", "itemCount": 3 },
+      { "name": "Word4", "type": "array", "itemCount": 4 },
+      { "name": "Word5", "type": "array", "itemCount": 5 },
+      { "name": "Word6", "type": "array", "itemCount": 6 },
+      { "name": "Word7", "type": "array", "itemCount": 7 },
+      { "name": "Word8", "type": "array", "itemCount": 8 },
+      { "name": "Byte3x3", "type": "array", "itemCount": 3 },
+      { "name": "Byte5x3", "type": "array", "itemCount": 3 },
+      { "name": "Byte7x3", "type": "array", "itemCount": 3 },
+      { "name": "Byte9x3", "type": "array", "itemCount": 3 },
+      {
+        "name": "StructA",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 2 }
+        ]
+      },
+      {
+        "name": "StructB",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 3 }
+        ]
+      },
+      {
+        "name": "StructC",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 4 }
+        ]
+      },
+      {
+        "name": "StructD",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 5 }
+        ]
+      },
+      {
+        "name": "StructE",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 },
+          { "name": "f3", "type": "byte" },
+          { "name": "f4", "type": "array", "itemCount": 2 }
+        ]
+      },
+      {
+        "name": "StructF",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 3 },
+          { "name": "f3", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructG",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "array", "itemCount": 3 },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 2 }
+        ]
+      },
+      {
+        "name": "StructH",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "array", "itemCount": 3 },
+          { "name": "f2", "type": "byte" },
+          { "name": "f3", "type": "array", "itemCount": 2 },
+          { "name": "f4", "type": "array", "itemCount": 4 }
+        ]
+      },
+      {
+        "name": "StructI",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "array", "itemCount": 3 },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructJ",
+        "type": "struct",
+        "fields": [
+          { "name": "f1", "type": "array", "itemCount": 6 },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructIx3",
+        "type": "array",
+        "item": {
+          "type": "struct",
+          "fields": [
+            { "name": "f1", "type": "array", "itemCount": 3 },
+            { "name": "f2", "type": "byte" }
+          ]
+        },
+        "itemCount": 3
+      },
+      {
+        "name": "StructO",
+        "type": "struct",
+        "fields": [
+          {
+            "name": "f1",
+            "type": "array",
+            "item": {
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 3 },
+                { "name": "f2", "type": "byte" }
+              ]
+            },
+            "itemCount": 3
+          },
+          { "name": "f2", "type": "byte" }
+        ]
+      },
+      {
+        "name": "StructP",
+        "type": "struct",
+        "fields": [
+          {
+            "name": "f1",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "array", "itemCount": 6 },
+              { "name": "f2", "type": "byte" }
+            ]
+          },
+          { "name": "f1", "type": "byte" }
+        ]
+      },
+
+      { "name": "Bytes", "type": "fixvec", "item": { "type": "byte" } },
+      { "name": "Words", "type": "fixvec", "item": { "type": "array", "itemCount": 2 } },
+      { "name": "Byte3Vec", "type": "fixvec", "item": { "type": "array", "itemCount": 3 } },
+      { "name": "Byte7Vec", "type": "fixvec", "item": { "type": "array", "itemCount": 7 } },
+      {
+        "name": "StructIVec",
+        "type": "fixvec",
+        "item": {
+          "type": "struct",
+          "fields": [
+            { "name": "f1", "type": "array", "itemCount": 3 },
+            { "name": "f2", "type": "byte" }
+          ]
+        }
+      },
+      {
+        "name": "StructJVec",
+        "type": "fixvec",
+        "item": {
+          "type": "struct",
+          "fields": [
+            { "name": "f1", "type": "array", "itemCount": 6 },
+            { "name": "f2", "type": "byte" }
+          ]
+        }
+      },
+      {
+        "name": "StructPVec",
+        "type": "fixvec",
+        "item": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "f1",
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 6 },
+                { "name": "f2", "type": "byte" }
+              ]
+            },
+            { "name": "f1", "type": "byte" }
+          ]
+        }
+      },
+      { "name": "BytesVec", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+      {
+        "name": "WordsVec",
+        "type": "dynvec",
+        "item": { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } }
+      },
+
+      { "name": "Table0", "type": "table", "fields": [] },
+      { "name": "Table1", "type": "table", "fields": [{ "name": "f1", "type": "byte" }] },
+      {
+        "name": "Table2",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 }
+        ]
+      },
+
+      {
+        "name": "Table3",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 },
+          {
+            "name": "f3",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          }
+        ]
+      },
+
+      {
+        "name": "Table4",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 },
+          {
+            "name": "f3",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          { "name": "f4", "type": "fixvec", "item": { "type": "byte" } }
+        ]
+      },
+
+      {
+        "name": "Table5",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 },
+          {
+            "name": "f3",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+          { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+        ]
+      },
+
+      {
+        "name": "Table6",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "byte" },
+          { "name": "f2", "type": "array", "itemCount": 2 },
+          {
+            "name": "f3",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+          { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+          {
+            "name": "f6",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+              { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+            ]
+          }
+        ]
+      },
+
+      { "name": "ByteOpt", "type": "option", "item": { "type": "byte" } },
+      {
+        "name": "WordOpt",
+        "type": "option",
+        "item": {
+          "type": "array",
+          "itemCount": 2
+        }
+      },
+      {
+        "name": "StructAOpt",
+        "type": "option",
+        "item": {
+          "type": "struct",
+          "fields": [
+            { "name": "f1", "type": "byte" },
+            { "name": "f2", "type": "byte" },
+            { "name": "f3", "type": "array", "itemCount": 2 },
+            { "name": "f4", "type": "array", "itemCount": 2 }
+          ]
+        }
+      },
+      {
+        "name": "StructPOpt",
+        "type": "option",
+        "item": {
+          "type": "struct",
+          "fields": [
+            {
+              "name": "f1",
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 6 },
+                { "name": "f2", "type": "byte" }
+              ]
+            },
+            { "name": "f1", "type": "byte" }
+          ]
+        }
+      },
+      {
+        "name": "BytesOpt",
+        "type": "option",
+        "item": {
+          "type": "fixvec",
+          "item": { "type": "byte" }
+        }
+      },
+      {
+        "name": "WordsOpt",
+        "type": "option",
+        "item": {
+          "type": "fixvec",
+          "item": { "type": "array", "itemCount": 2 }
+        }
+      },
+      {
+        "name": "BytesVecOpt",
+        "type": "option",
+        "item": {
+          "type": "dynvec",
+          "item": { "type": "fixvec", "item": { "type": "byte" } }
+        }
+      },
+      {
+        "name": "WordsVecOpt",
+        "type": "option",
+        "item": {
+          "type": "dynvec",
+          "item": { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } }
+        }
+      },
+      {
+        "name": "Table0Opt",
+        "type": "option",
+        "item": {
+          "type": "table",
+          "fields": []
+        }
+      },
+      {
+        "name": "Table6Opt",
+        "type": "option",
+        "item": {
+          "type": "table",
+          "fields": [
+            { "name": "f1", "type": "byte" },
+            { "name": "f2", "type": "array", "itemCount": 2 },
+            {
+              "name": "f3",
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "byte" },
+                { "name": "f2", "type": "byte" },
+                { "name": "f3", "type": "array", "itemCount": 2 },
+                { "name": "f4", "type": "array", "itemCount": 2 }
+              ]
+            },
+            { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+            { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+            {
+              "name": "f6",
+              "type": "table",
+              "fields": [
+                { "name": "f1", "type": "byte" },
+                { "name": "f2", "type": "array", "itemCount": 2 },
+                {
+                  "name": "f3",
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "byte" },
+                    { "name": "f3", "type": "array", "itemCount": 2 },
+                    { "name": "f4", "type": "array", "itemCount": 2 }
+                  ]
+                },
+                { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "name": "Table6OptOpt",
+        "type": "option",
+        "item": {
+          "type": "option",
+          "item": {
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+              { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+              {
+                "name": "f6",
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                ]
+              }
+            ]
+          }
+        }
+      },
+
+      {
+        "name": "ByteOptVec",
+        "type": "dynvec",
+        "item": {
+          "type": "option",
+          "item": {
+            "type": "byte"
+          }
+        }
+      },
+      {
+        "name": "WordOptVec",
+        "type": "dynvec",
+        "item": {
+          "type": "option",
+          "item": {
+            "type": "array",
+            "itemCount": 2
+          }
+        }
+      },
+      {
+        "name": "WordsOptVec",
+        "type": "dynvec",
+        "item": {
+          "type": "option",
+          "item": {
+            "type": "fixvec",
+            "item": { "type": "array", "itemCount": 2 }
+          }
+        }
+      },
+      {
+        "name": "BytesOptVec",
+        "type": "dynvec",
+        "item": {
+          "type": "option",
+          "item": {
+            "type": "fixvec",
+            "item": { "type": "byte" }
+          }
+        }
+      },
+
+      {
+        "name": "UnionA",
+        "type": "union",
+        "items": [
+          {
+            "type": "byte"
+          },
+          {
+            "type": "array",
+            "itemCount": 2
+          },
+          {
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          {
+            "type": "fixvec",
+            "item": { "type": "byte" }
+          },
+          { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } },
+          {
+            "type": "table",
+            "fields": []
+          },
+          {
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+              { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+              {
+                "name": "f6",
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "option",
+            "item": {
+              "type": "table",
+              "fields": [
+                { "name": "f1", "type": "byte" },
+                { "name": "f2", "type": "array", "itemCount": 2 },
+                {
+                  "name": "f3",
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "byte" },
+                    { "name": "f3", "type": "array", "itemCount": 2 },
+                    { "name": "f4", "type": "array", "itemCount": 2 }
+                  ]
+                },
+                { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                {
+                  "name": "f6",
+                  "type": "table",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "array", "itemCount": 2 },
+                    {
+                      "name": "f3",
+                      "type": "struct",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "byte" },
+                        { "name": "f3", "type": "array", "itemCount": 2 },
+                        { "name": "f4", "type": "array", "itemCount": 2 }
+                      ]
+                    },
+                    { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                    { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                  ]
+                }
+              ]
+            }
+          }
+        ]
+      },
+
+      {
+        "name": "TableA",
+        "type": "table",
+        "fields": [
+          { "name": "f1", "type": "array", "itemCount": 2 },
+          {
+            "name": "f2",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          { "name": "f3", "type": "fixvec", "item": { "type": "byte" } },
+          { "name": "f4", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+          { "name": "f5", "type": "table", "fields": [{ "name": "f1", "type": "byte" }] },
+          {
+            "name": "f6",
+            "type": "option",
+            "item": {
+              "type": "fixvec",
+              "item": { "type": "byte" }
+            }
+          },
+          {
+            "name": "f7",
+            "type": "union",
+            "items": [
+              {
+                "type": "byte"
+              },
+              {
+                "type": "array",
+                "itemCount": 2
+              },
+              {
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              {
+                "type": "fixvec",
+                "item": { "type": "byte" }
+              },
+              { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } },
+              {
+                "type": "table",
+                "fields": []
+              },
+              {
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                  {
+                    "name": "f6",
+                    "type": "table",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "array", "itemCount": 2 },
+                      {
+                        "name": "f3",
+                        "type": "struct",
+                        "fields": [
+                          { "name": "f1", "type": "byte" },
+                          { "name": "f2", "type": "byte" },
+                          { "name": "f3", "type": "array", "itemCount": 2 },
+                          { "name": "f4", "type": "array", "itemCount": 2 }
+                        ]
+                      },
+                      { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                      { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "option",
+                "item": {
+                  "type": "table",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "array", "itemCount": 2 },
+                    {
+                      "name": "f3",
+                      "type": "struct",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "byte" },
+                        { "name": "f3", "type": "array", "itemCount": 2 },
+                        { "name": "f4", "type": "array", "itemCount": 2 }
+                      ]
+                    },
+                    { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                    { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                    {
+                      "name": "f6",
+                      "type": "table",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "array", "itemCount": 2 },
+                        {
+                          "name": "f3",
+                          "type": "struct",
+                          "fields": [
+                            { "name": "f1", "type": "byte" },
+                            { "name": "f2", "type": "byte" },
+                            { "name": "f3", "type": "array", "itemCount": 2 },
+                            { "name": "f4", "type": "array", "itemCount": 2 }
+                          ]
+                        },
+                        { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                        { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          },
+          { "name": "f8", "type": "byte" }
+        ]
+      },
+
+      {
+        "name": "AllInOne",
+        "type": "table",
+        "fields": [
+          { "name": "f0", "type": "byte" },
+          { "name": "f1", "type": "array", "itemCount": 2 },
+          { "name": "f2", "type": "array", "itemCount": 3 },
+          { "name": "f3", "type": "array", "itemCount": 4 },
+          { "name": "f4", "type": "array", "itemCount": 5 },
+          { "name": "f5", "type": "array", "itemCount": 6 },
+          { "name": "f6", "type": "array", "itemCount": 7 },
+          { "name": "f7", "type": "array", "itemCount": 8 },
+          { "name": "f8", "type": "array", "itemCount": 9 },
+          { "name": "f9", "type": "array", "itemCount": 10 },
+          { "name": "f10", "type": "array", "itemCount": 11 },
+          { "name": "f11", "type": "array", "itemCount": 12 },
+          { "name": "f12", "type": "array", "itemCount": 13 },
+          { "name": "f13", "type": "array", "itemCount": 14 },
+          { "name": "f14", "type": "array", "itemCount": 15 },
+          { "name": "f15", "type": "array", "itemCount": 16 },
+          { "name": "f16", "type": "array", "itemCount": 2 },
+          { "name": "f17", "type": "array", "itemCount": 2 },
+          { "name": "f18", "type": "array", "itemCount": 3 },
+          { "name": "f19", "type": "array", "itemCount": 4 },
+          { "name": "f20", "type": "array", "itemCount": 5 },
+          { "name": "f21", "type": "array", "itemCount": 6 },
+          { "name": "f22", "type": "array", "itemCount": 7 },
+          { "name": "f23", "type": "array", "itemCount": 8 },
+          { "name": "f24", "type": "array", "itemCount": 3 },
+          { "name": "f25", "type": "array", "itemCount": 3 },
+          { "name": "f26", "type": "array", "itemCount": 3 },
+          { "name": "f27", "type": "array", "itemCount": 3 },
+          {
+            "name": "f28",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          {
+            "name": "f29",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 3 }
+            ]
+          },
+          {
+            "name": "f30",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 4 }
+            ]
+          },
+          {
+            "name": "f31",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 5 }
+            ]
+          },
+          {
+            "name": "f32",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              { "name": "f3", "type": "byte" },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          {
+            "name": "f33",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 3 },
+              { "name": "f3", "type": "byte" }
+            ]
+          },
+          {
+            "name": "f34",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "array", "itemCount": 3 },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 2 }
+            ]
+          },
+          {
+            "name": "f35",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "array", "itemCount": 3 },
+              { "name": "f2", "type": "byte" },
+              { "name": "f3", "type": "array", "itemCount": 2 },
+              { "name": "f4", "type": "array", "itemCount": 4 }
+            ]
+          },
+          {
+            "name": "f36",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "array", "itemCount": 3 },
+              { "name": "f2", "type": "byte" }
+            ]
+          },
+          {
+            "name": "f37",
+            "type": "struct",
+            "fields": [
+              { "name": "f1", "type": "array", "itemCount": 6 },
+              { "name": "f2", "type": "byte" }
+            ]
+          },
+          {
+            "name": "f38",
+            "type": "array",
+            "item": {
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 3 },
+                { "name": "f2", "type": "byte" }
+              ]
+            },
+            "itemCount": 3
+          },
+          {
+            "name": "f39",
+            "type": "struct",
+            "fields": [
+              {
+                "name": "f1",
+                "type": "array",
+                "item": {
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "array", "itemCount": 3 },
+                    { "name": "f2", "type": "byte" }
+                  ]
+                },
+                "itemCount": 3
+              },
+              { "name": "f2", "type": "byte" }
+            ]
+          },
+          {
+            "name": "f40",
+            "type": "struct",
+            "fields": [
+              {
+                "name": "f1",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "array", "itemCount": 6 },
+                  { "name": "f2", "type": "byte" }
+                ]
+              },
+              { "name": "f1", "type": "byte" }
+            ]
+          },
+          { "name": "f41", "type": "fixvec", "item": { "type": "byte" } },
+          { "name": "f42", "type": "fixvec", "item": { "type": "array", "itemCount": 2 } },
+          { "name": "f43", "type": "fixvec", "item": { "type": "array", "itemCount": 3 } },
+          { "name": "f44", "type": "fixvec", "item": { "type": "array", "itemCount": 7 } },
+          {
+            "name": "f45",
+            "type": "fixvec",
+            "item": {
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 3 },
+                { "name": "f2", "type": "byte" }
+              ]
+            }
+          },
+          {
+            "name": "f46",
+            "type": "fixvec",
+            "item": {
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "array", "itemCount": 6 },
+                { "name": "f2", "type": "byte" }
+              ]
+            }
+          },
+          {
+            "name": "f47",
+            "type": "fixvec",
+            "item": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "f1",
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "array", "itemCount": 6 },
+                    { "name": "f2", "type": "byte" }
+                  ]
+                },
+                { "name": "f1", "type": "byte" }
+              ]
+            }
+          },
+          { "name": "f48", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+          {
+            "name": "f49",
+            "type": "dynvec",
+            "item": { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } }
+          },
+          { "name": "f50", "type": "table", "fields": [] },
+          { "name": "f51", "type": "table", "fields": [{ "name": "f1", "type": "byte" }] },
+          {
+            "name": "f52",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 }
+            ]
+          },
+          {
+            "name": "f53",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "f54",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } }
+            ]
+          },
+          {
+            "name": "f55",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+              { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+            ]
+          },
+          {
+            "name": "f56",
+            "type": "table",
+            "fields": [
+              { "name": "f1", "type": "byte" },
+              { "name": "f2", "type": "array", "itemCount": 2 },
+              {
+                "name": "f3",
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+              { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+              {
+                "name": "f6",
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                ]
+              }
+            ]
+          },
+          { "name": "f57", "type": "option", "item": { "type": "byte" } },
+          {
+            "name": "f58",
+            "type": "option",
+            "item": {
+              "type": "array",
+              "itemCount": 2
+            }
+          },
+          {
+            "name": "f59",
+            "type": "option",
+            "item": {
+              "type": "struct",
+              "fields": [
+                { "name": "f1", "type": "byte" },
+                { "name": "f2", "type": "byte" },
+                { "name": "f3", "type": "array", "itemCount": 2 },
+                { "name": "f4", "type": "array", "itemCount": 2 }
+              ]
+            }
+          },
+          {
+            "name": "f60",
+            "type": "option",
+            "item": {
+              "type": "struct",
+              "fields": [
+                {
+                  "name": "f1",
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "array", "itemCount": 6 },
+                    { "name": "f2", "type": "byte" }
+                  ]
+                },
+                { "name": "f1", "type": "byte" }
+              ]
+            }
+          },
+          {
+            "name": "f61",
+            "type": "option",
+            "item": {
+              "type": "fixvec",
+              "item": { "type": "byte" }
+            }
+          },
+          {
+            "name": "f62",
+            "type": "option",
+            "item": {
+              "type": "fixvec",
+              "item": { "type": "array", "itemCount": 2 }
+            }
+          },
+          {
+            "name": "f63",
+            "type": "option",
+            "item": {
+              "type": "dynvec",
+              "item": { "type": "fixvec", "item": { "type": "byte" } }
+            }
+          },
+          {
+            "name": "f64",
+            "type": "option",
+            "item": {
+              "type": "dynvec",
+              "item": { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } }
+            }
+          },
+          {
+            "name": "f65",
+            "type": "option",
+            "item": {
+              "type": "table",
+              "fields": []
+            }
+          },
+          {
+            "name": "f66",
+            "type": "option",
+            "item": {
+              "type": "table",
+              "fields": [
+                { "name": "f1", "type": "byte" },
+                { "name": "f2", "type": "array", "itemCount": 2 },
+                {
+                  "name": "f3",
+                  "type": "struct",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "byte" },
+                    { "name": "f3", "type": "array", "itemCount": 2 },
+                    { "name": "f4", "type": "array", "itemCount": 2 }
+                  ]
+                },
+                { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                {
+                  "name": "f6",
+                  "type": "table",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "array", "itemCount": 2 },
+                    {
+                      "name": "f3",
+                      "type": "struct",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "byte" },
+                        { "name": "f3", "type": "array", "itemCount": 2 },
+                        { "name": "f4", "type": "array", "itemCount": 2 }
+                      ]
+                    },
+                    { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                    { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                  ]
+                }
+              ]
+            }
+          },
+          {
+            "name": "f67",
+            "type": "option",
+            "item": {
+              "type": "option",
+              "item": {
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                  {
+                    "name": "f6",
+                    "type": "table",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "array", "itemCount": 2 },
+                      {
+                        "name": "f3",
+                        "type": "struct",
+                        "fields": [
+                          { "name": "f1", "type": "byte" },
+                          { "name": "f2", "type": "byte" },
+                          { "name": "f3", "type": "array", "itemCount": 2 },
+                          { "name": "f4", "type": "array", "itemCount": 2 }
+                        ]
+                      },
+                      { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                      { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "f68",
+            "type": "dynvec",
+            "item": {
+              "type": "option",
+              "item": {
+                "type": "byte"
+              }
+            }
+          },
+          {
+            "name": "f69",
+            "type": "dynvec",
+            "item": {
+              "type": "option",
+              "item": {
+                "type": "array",
+                "itemCount": 2
+              }
+            }
+          },
+          {
+            "name": "f70",
+            "type": "dynvec",
+            "item": {
+              "type": "option",
+              "item": {
+                "type": "fixvec",
+                "item": { "type": "array", "itemCount": 2 }
+              }
+            }
+          },
+          {
+            "name": "f71",
+            "type": "dynvec",
+            "item": {
+              "type": "option",
+              "item": {
+                "type": "fixvec",
+                "item": { "type": "byte" }
+              }
+            }
+          },
+          {
+            "name": "f72",
+            "type": "union",
+            "items": [
+              {
+                "type": "byte"
+              },
+              {
+                "type": "array",
+                "itemCount": 2
+              },
+              {
+                "type": "struct",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "byte" },
+                  { "name": "f3", "type": "array", "itemCount": 2 },
+                  { "name": "f4", "type": "array", "itemCount": 2 }
+                ]
+              },
+              {
+                "type": "fixvec",
+                "item": { "type": "byte" }
+              },
+              { "type": "fixvec", "item": { "type": "array", "itemCount": 2 } },
+              {
+                "type": "table",
+                "fields": []
+              },
+              {
+                "type": "table",
+                "fields": [
+                  { "name": "f1", "type": "byte" },
+                  { "name": "f2", "type": "array", "itemCount": 2 },
+                  {
+                    "name": "f3",
+                    "type": "struct",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "byte" },
+                      { "name": "f3", "type": "array", "itemCount": 2 },
+                      { "name": "f4", "type": "array", "itemCount": 2 }
+                    ]
+                  },
+                  { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                  { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                  {
+                    "name": "f6",
+                    "type": "table",
+                    "fields": [
+                      { "name": "f1", "type": "byte" },
+                      { "name": "f2", "type": "array", "itemCount": 2 },
+                      {
+                        "name": "f3",
+                        "type": "struct",
+                        "fields": [
+                          { "name": "f1", "type": "byte" },
+                          { "name": "f2", "type": "byte" },
+                          { "name": "f3", "type": "array", "itemCount": 2 },
+                          { "name": "f4", "type": "array", "itemCount": 2 }
+                        ]
+                      },
+                      { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                      { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "option",
+                "item": {
+                  "type": "table",
+                  "fields": [
+                    { "name": "f1", "type": "byte" },
+                    { "name": "f2", "type": "array", "itemCount": 2 },
+                    {
+                      "name": "f3",
+                      "type": "struct",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "byte" },
+                        { "name": "f3", "type": "array", "itemCount": 2 },
+                        { "name": "f4", "type": "array", "itemCount": 2 }
+                      ]
+                    },
+                    { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                    { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } },
+                    {
+                      "name": "f6",
+                      "type": "table",
+                      "fields": [
+                        { "name": "f1", "type": "byte" },
+                        { "name": "f2", "type": "array", "itemCount": 2 },
+                        {
+                          "name": "f3",
+                          "type": "struct",
+                          "fields": [
+                            { "name": "f1", "type": "byte" },
+                            { "name": "f2", "type": "byte" },
+                            { "name": "f3", "type": "array", "itemCount": 2 },
+                            { "name": "f4", "type": "array", "itemCount": 2 }
+                          ]
+                        },
+                        { "name": "f4", "type": "fixvec", "item": { "type": "byte" } },
+                        { "name": "f5", "type": "dynvec", "item": { "type": "fixvec", "item": { "type": "byte" } } }
+                      ]
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
