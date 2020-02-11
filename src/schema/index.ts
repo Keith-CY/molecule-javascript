@@ -140,7 +140,7 @@ class Schema {
         }
         case 'union': {
           if (!declaration.items) {
-            return declaration
+            return { ...declaration, items: [] }
           }
           const normalizedType = {
             ...declaration,
@@ -161,7 +161,7 @@ class Schema {
         case 'struct':
         case 'table': {
           if (!declaration.fields) {
-            return declaration
+            return { ...declaration, fields: [] }
           }
           const normalizedType = {
             ...declaration,

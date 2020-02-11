@@ -42,6 +42,10 @@
       "imported_depth": 1
     },
     {
+      "name": "Default Struct",
+      "type": "struct"
+    },
+    {
       "name": "Word10",
       "type": "array",
       "item": "Word",
@@ -81,9 +85,17 @@
       ]
     },
     {
+      "name": "Default Table",
+      "type": "table"
+    },
+    {
       "type": "union",
       "name": "UnionA",
       "items": ["Bytes", "Struct1", "byte", "Table1"]
+    },
+    {
+      "name": "Default Union",
+      "type": "union"
     }
   ]
 }

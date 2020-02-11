@@ -1,5 +1,5 @@
 import path from 'path'
-import { Schema } from '.'
+import { Schema } from '..'
 import normalizedSchema from './normalized.schema.json'
 
 describe('schema', () => {
@@ -17,9 +17,14 @@ describe('schema', () => {
     }).toThrow()
   })
 
-  test('re-declare type should throw an error', () => {
+  test('redeclared type should throw an error', () => {
     const filePath = path.resolve(__dirname, './root/redeclared.schema.json')
     expect(() => Schema.fromFile(filePath)).toThrow('Type Word has been declared')
+  })
+
+  test('reimported type should throw an error', () => {
+    const filePath = path.resolve(__dirname, './root/reimported.schema.json')
+    expect(() => Schema.fromFile(filePath)).toThrow('Type Word has been declared and cannot be imported')
   })
 
   test('undeclare type should throw an error', () => {

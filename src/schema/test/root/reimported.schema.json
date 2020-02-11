@@ -1,0 +1,22 @@
+{
+  "namespace": "types",
+  "imports": [
+    {
+      "name": "word.schema",
+      "paths": ["nested"],
+      "path_supers": 1
+    },
+    {
+      "name": "word.schema",
+      "paths": ["nested"],
+      "path_supers": 1
+    }
+  ],
+  "declarations": [
+    {
+      "name": "Word",
+      "type": "array",
+      "item_count": 1
+    }
+  ]
+}
