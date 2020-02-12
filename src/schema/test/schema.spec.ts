@@ -1,6 +1,7 @@
 import path from 'path'
 import { Schema } from '..'
 import normalizedSchema from './normalized.schema.json'
+import allInOneSchmea from './allInOne.fixture.json'
 
 describe('schema', () => {
   test('normalize', () => {
@@ -8,6 +9,12 @@ describe('schema', () => {
     const schema = Schema.fromFile(filePath)
     const normalized = schema.getNormalizedSchema()
     expect(normalized).toEqual(normalizedSchema)
+  })
+
+  test('all in one', () => {
+    const schema = new Schema(allInOneSchmea.schema)
+    const normalized = schema.getNormalizedSchema()
+    expect(normalized).toEqual(allInOneSchmea.expected)
   })
 
   test('schema not exists should throw an error', () => {

@@ -140,7 +140,9 @@ class Schema {
         }
         case 'union': {
           if (!declaration.items) {
-            return { ...declaration, items: [] }
+            const tmp = { ...declaration, items: [] }
+            this.declarations.set(tmp.name, tmp)
+            return tmp
           }
           const normalizedType = {
             ...declaration,
@@ -161,7 +163,9 @@ class Schema {
         case 'struct':
         case 'table': {
           if (!declaration.fields) {
-            return { ...declaration, fields: [] }
+            const tmp = { ...declaration, fields: [] }
+            this.declarations.set(tmp.name, tmp)
+            return tmp
           }
           const normalizedType = {
             ...declaration,
@@ -182,7 +186,8 @@ class Schema {
         default: {
           const type = this.declarations.get(declaration.type)
           if (type) {
-            return type
+            const { name, ...rest } = type
+            return declaration.name === undefined ? rest : { ...rest, name: declaration.name }
           }
           throw new Error(`Type ${declaration.type} is not declared`)
         }
