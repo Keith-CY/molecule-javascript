@@ -9,12 +9,16 @@
       "exception": "Expect 0102030405 to be a hex string"
     },
     {
+      "source": "0x",
+      "expected": "0x"
+    },
+    {
       "source": "ab",
       "exception": "Expect ab to be a hex string"
     },
     {
       "source": "",
-      "expected": ""
+      "expected": "0x"
     }
   ],
   "deserialize": [
@@ -32,9 +36,15 @@
     },
     {
       "source": {
+        "serialized": "0x"
+      },
+      "expected": "0x"
+    },
+    {
+      "source": {
         "serialized": ""
       },
-      "expected": ""
+      "expected": "0x"
     }
   ]
 }

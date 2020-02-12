@@ -91,6 +91,15 @@ describe('Test helpers', () => {
       type: 'array',
     }
 
-    expect(() => new Molecule(schema)).toThrow('ArraySchema must have itemCount')
+    expect(() => new Molecule(schema)).toThrow('ArraySchema must have valid itemCount')
+  })
+  it('array type having invalid item count should throw an error', () => {
+    const schema: any = {
+      name: 'Invalid Array',
+      type: 'array',
+    }
+
+    expect(() => new Molecule({ ...schema, itemCount: '1' })).toThrow('ArraySchema must have valid itemCount')
+    expect(() => new Molecule({ ...schema, itemCount: NaN })).toThrow('ArraySchema must have valid itemCount')
   })
 })

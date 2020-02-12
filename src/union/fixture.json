@@ -2,6 +2,12 @@
   "serialize": [
     {
       "source": [
+        [0, "0x"]
+      ],
+      "expected": "0x00000000"
+    },
+    {
+      "source": [
         [0, "0x030405060708"]
       ],
       "expected": "0x00000000030405060708"
@@ -21,6 +27,15 @@
     }
   ],
   "deserialize": [
+    {
+      "source": {
+        "serialized": "0x00000000",
+        "indices": [ 0 ]
+      },
+      "expected": [
+        [0, "0x"]
+      ]
+    }, 
     {
       "source": {
         "serialized": "0x00000000030405060708",

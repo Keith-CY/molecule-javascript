@@ -54,7 +54,7 @@ export const deserializeDynvec = (serialized: HexString) => {
     throw new Error(`Expect offset 0x${offsetsData} to have a size of ${HEADER_ELEMENT_SIZE} bytes`)
   }
 
-  const offsets: string[] = offsetsData.match(matcher)!.map(offset => `0x${offset}`)
+  const offsets: string[] = (offsetsData.match(matcher) ?? []).map(offset => `0x${offset}`)
 
   offsets.reduceRight((o1: number | string, o2: string) => {
     const end = typeof o1 === 'string' ? littleHexToInt(o1) : o1

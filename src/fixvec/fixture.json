@@ -5,6 +5,10 @@
       "expected": "0x00000000"
     },
     {
+      "source": ["0x"],
+      "expected": "0x01000000"
+    },
+    {
       "source": ["0x12"],
       "expected": "0x0100000012"
     },
@@ -37,6 +41,10 @@
     {
       "source": "0x00000000",
       "expected": []
+    },
+    {
+      "source": "0x01000000",
+      "expected": ["0x"]
     },
     {
       "source": "0x0100000012",

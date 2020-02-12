@@ -18,6 +18,22 @@
     },
     {
       "source": [
+        ["name", "0x"],
+        ["name", "0x2"],
+        ["name", "0x3"]
+      ],
+      "expected": "0x0203"
+    },
+    {
+      "source": [
+        ["name", "0x"],
+        ["name", "0x"],
+        ["name", "0x"]
+      ],
+      "expected": "0x"
+    },
+    {
+      "source": [
         ["name", "01"],
         ["name", "02"],
         ["name", "03"]
@@ -41,7 +57,6 @@
         ["name2", "0x03"]
       ]
     },
-
     {
       "source": {
         "serialized": "0x010203",

@@ -1,5 +1,5 @@
 export function assertIsHexStr(str: any): asserts str is HexString {
-  if (typeof str !== 'string' || !str.startsWith('0x') || Number.isNaN(+str)) {
+  if (typeof str !== 'string' || !str.startsWith('0x') || (Number.isNaN(+str) && str !== '0x')) {
     throw new TypeError(`Expect ${str} to be a hex string`)
   }
 }

@@ -121,8 +121,8 @@ class Molecule {
       throw new Error(SCHEMA_HAS_INVALID_TYPE)
     }
     if (schema.type === 'array') {
-      if (!schema.itemCount || schema.itemCount === 0) {
-        throw new Error('ArraySchema must have itemCount')
+      if (!schema.itemCount || typeof schema.itemCount !== 'number' || Number.isNaN(schema.itemCount)) {
+        throw new Error('ArraySchema must have valid itemCount')
       }
     }
   }
