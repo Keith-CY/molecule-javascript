@@ -9,8 +9,8 @@ import {
   isStructSchema,
   isTableSchema,
 } from '.'
-import { serialize as serializeFixture } from './fixture_serialize.json'
-import { deserialize as deserializeFixture } from './fixture_deserialize.json'
+import { serialize as serializeFixture } from './serialize.fixture.json'
+import { deserialize as deserializeFixture } from './deserialize.fixture.json'
 
 describe('Test Molecule serialize', () => {
   const fixtureTable = serializeFixture.map(({ schema, value, expected }) => [schema, value, expected])
