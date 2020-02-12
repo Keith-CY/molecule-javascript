@@ -9,6 +9,14 @@
       "expected": "0x010203"
     },
     {
+      "source": ["0x", "0x2", "0x3"],
+      "expected": "0x0203"
+    },
+    {
+      "source": ["0x", "0x", "0x"],
+      "expected": "0x"
+    },
+    {
       "source": ["01", "02", "03"],
       "exception": "Expect 01 to be a hex string"
     },
