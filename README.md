@@ -349,9 +349,11 @@ const parsed = molecule.deserialize(serialized)
 ### Use as cli
 
 ```sh
-molecule-javascript root/root.schema.json molecules.js
+moleculec-js root/root.schema.json molecules.js
 # or
-molecule-javascript '{"namespace": "bytes", "declarations": [ {"name": "Bytes", type: "fixvec", item: "byte" }]}' molecules.js
+moleculec-js '{"namespace": "bytes", "declarations": [ { "name": "Bytes", "type": "fixvec","item": "byte" } ]}' molecules.js
+# or used with moleculec
+moleculec --language - --format json --schema-file ./schema.mol | moleculec-js |> molecules.js
 ```
 
 ```js
