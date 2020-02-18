@@ -22,7 +22,7 @@ const printNormalizedSchema = (filePath: string) => {
 }
 
 const outputGenerator = () => {
-  const schameOrPath = arg0
+  const schemaOrPath = arg0
   const outputFile = arg1
   try {
     if (!fs.existsSync(schameOrPath)) {
