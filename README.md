@@ -37,7 +37,7 @@ const normalizedSchema = {
   },
 }
 const data = ['0x01', '0x02']
-const molecule = new MoleculeJavaScript.Molecule(normalizedSchema)
+const molecule = new MoleculeJavaScript.Molecule(normalizedSchema) // The package is exposed as globalThis.MoleculeJavaScript
 const serialized = molecule.serialize(data) // expect to be "0x020000000102"
 const parsed = molecule.deserialize('0x020000000102') // expect to be ["0x01", "0x02"]
 ```

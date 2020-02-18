@@ -25,7 +25,7 @@ const outputGenerator = () => {
   const schemaOrPath = arg0
   const outputFile = arg1
   try {
-    if (!fs.existsSync(schameOrPath)) {
+    if (!fs.existsSync(schemaOrPath)) {
       try {
         JSON.parse(schemaOrPath)
       } catch {
