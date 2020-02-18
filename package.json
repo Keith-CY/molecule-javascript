@@ -1,6 +1,6 @@
 {
   "name": "molecule-javascript",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "",
   "main": "./lib/index.js",
   "bin": {
@@ -50,7 +50,7 @@
     "javascript"
   ],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/Keith-CY/molecule-javascript/issues"
   },
