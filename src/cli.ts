@@ -27,14 +27,14 @@ const outputGenerator = () => {
   try {
     if (!fs.existsSync(schameOrPath)) {
       try {
-        JSON.parse(schameOrPath)
+        JSON.parse(schemaOrPath)
       } catch {
         throw new Error(`Expect schema to be a JSON`)
       }
     }
-    const normalizeScript = fs.existsSync(schameOrPath)
-      ? `const normalizedSchema = Schema.fromFile('${schameOrPath}').getNormalizedSchema()`
-      : `const normalizedSchema = new Schema(${schameOrPath}).getNormalizedSchema()`
+    const normalizeScript = fs.existsSync(schemaOrPath)
+      ? `const normalizedSchema = Schema.fromFile('${schemaOrPath}').getNormalizedSchema()`
+      : `const normalizedSchema = new Schema(${schemaOrPath}).getNormalizedSchema()`
     const script = `const { Molecule } = require('molecule-javascript')
 const { Schema }  = require('molecule-javascript/lib/schema')
 ${normalizeScript}
