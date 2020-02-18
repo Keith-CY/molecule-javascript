@@ -53,7 +53,7 @@ class StructUtils {
   }
 
   private addPair = (field: StructField, byteLength: number) => {
-    if (this.aliasLengthPair.findIndex(pair => pair.alias === field.alias) < 0) {
+    if (this.aliasLengthPair.map(pair => pair.alias).indexOf(field.alias) < 0) {
       this.aliasLengthPair.push({ alias: field.alias, byteLength })
     }
   }
