@@ -1,6 +1,161 @@
-# molecule-javascript
+# Molecule-JavaScript
 
-## Molecule
+## Quick Start
+
+There's a [template project](https://github.com/keith-cy/molecule-javascript-template) for quick start to use `molecule-javascript`.
+
+It shows the most general way of using `molecule-javascript` in Browsers and Node.js with real-world demos.
+
+## Start
+
+### Use in Node.js
+
+```js
+import Molecule from '@nervosnetwork/molecule-javascript'
+
+const normalizedSchema = {
+  name: 'Bytes',
+  type: 'fixvec',
+  item: {
+    type: 'byte',
+  },
+}
+const data = ['0x01', '0x02']
+const molecule = new Molecule(normalizedSchema)
+const serialized = molecule.serialize(data) // expect to be "0x020000000102"
+const parsed = molecule.deserialize('0x020000000102') // expect to be ["0x01", "0x02"]
+```
+
+### Use in Browsers
+
+```js
+const normalizedSchema = {
+  name: 'Bytes',
+  type: 'fixvec',
+  item: {
+    type: 'byte',
+  },
+}
+const data = ['0x01', '0x02']
+const molecule = new MoleculeJavaScript.Molecule(normalizedSchema) // The package is exposed as globalThis.MoleculeJavaScript
+const serialized = molecule.serialize(data) // expect to be "0x020000000102"
+const parsed = molecule.deserialize('0x020000000102') // expect to be ["0x01", "0x02"]
+```
+
+### Normalize Schema
+
+Usually the schema will be defined with intermediate types in Molefile, e.g.
+
+```
+vector Word <byte>;
+vector Words <Word>;
+```
+
+There're two steps to normalize it.
+
+#### 1. Use [`Moleculec`](https://github.com/nervosnetwork/molecule/) to transform Molefile into JSON file, which is valid in JavaScript
+
+This step requires `rust`
+
+```bash
+$ cargo install moleculec
+$ moleculec --language - --format json --schema-file ./types.mol > ./types.json
+```
+
+By the opeartion above, a new file named `types.json` will be generated with following content:
+
+```json
+{
+  "namespace": "types",
+  "imports": [],
+  "declarations": [
+    {
+      "type": "fixvec",
+      "name": "Word",
+      "item": "byte"
+    },
+    {
+      "type": "dynvec",
+      "name": "Words",
+      "item": "Word"
+    }
+  ]
+}
+```
+
+#### 2. Normalize intermediate types with native types
+
+```sh
+$ npx moleculec-js -ns ./types.json > normalized-types.json
+```
+
+Then the `normalized-types.json` is generated as follows
+
+```json
+{
+  "namespace": "types",
+  "declarations": [
+    {
+      "type": "fixvec",
+      "name": "Word",
+      "item": {
+        "type": "byte"
+      }
+    },
+    {
+      "type": "dynvec",
+      "name": "Words",
+      "item": {
+        "type": "fixvec",
+        "item": {
+          "type": "byte"
+        }
+      }
+    }
+  ]
+}
+```
+
+### Shortcut for Node.js
+
+The following three commands are equivalent.
+
+```sh
+moleculec-js ./schema.json molecules.js
+# or
+moleculec-js '{"namespace": "bytes", "declarations": [ { "name": "Bytes", "type": "fixvec","item": "byte" } ]}' molecules.js
+# or used with moleculec
+moleculec --language - --format json --schema-file ./schema.mol | moleculec-js > molecules.js
+```
+
+And `molecule.js` will be generated as
+
+```js
+const { Molecule } = require('molecule-javascript')
+const { Schema } = require('molecule-javascript/lib/schema')
+/**
+ * moleculec-js ./schema.json molecules.js will use the file path directly
+ * const normalizedSchema = new Schema('./schema.json').getNormalizedSchema()
+ */
+const normalizedSchema = new Schema({
+  namespace: 'types',
+  imports: [],
+  declarations: [
+    {
+      type: 'fixvec',
+      name: 'Bytes',
+      item: 'byte',
+    },
+  ],
+}).getNormalizedSchema()
+const molecules = {}
+normalizedSchema.declarations.forEach(declaration => {
+  molecules[declaration.name] = new Molecule(declaration)
+})
+module.exports = { normalizedSchema, molecules }
+```
+
+## For Those Who Want More Info on Molecule
 
 [Molecule](https://github.com/nervosnetwork/rfcs/blob/master/rfcs/0008-serialization/0008-serialization.md) is a canonicalization and zero-copy serialization format.
 
@@ -330,33 +485,4 @@ intermediate for `bar/types.mol`
     }
   ]
 }
-```
-
-## Examples
-
-### Use in runtime
-
-```js
-import Molecule from '@nervosnetwork/molecule-javascript'
-import schema from 'schema.json'
-import data from 'data'
-
-const molecule = new Molecule({ schema })
-const serialized = molecule.serialize(data)
-const parsed = molecule.deserialize(serialized)
-```
-
-### Use as cli
-
-```sh
-moleculec-js root/root.schema.json molecules.js
-# or
-moleculec-js '{"namespace": "bytes", "declarations": [ { "name": "Bytes", "type": "fixvec","item": "byte" } ]}' molecules.js
-# or used with moleculec
-moleculec --language - --format json --schema-file ./schema.mol | moleculec-js |> molecules.js
-```
-
-```js
-const { molecules } = require('./molecules.js')
-molecules.Bytes.serialize(['0x01', '0x02'])
 ```

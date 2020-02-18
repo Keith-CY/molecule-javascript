@@ -3,25 +3,28 @@
 import fs from 'fs'
 import readline from 'readline'
 
+const { Schema } = require('../lib/schema.js')
+
 const [, , ...args] = process.argv
 
-let schemaOrPath = args[0]
-const outputFile = args[1] || ''
+let arg0 = args[0]
+const arg1 = args[1] || ''
 
-const getFormat = () => {
-  if (schemaOrPath === '--format') {
-    console.info('JSON')
-    process.exit(0)
-  }
+const printFormat = () => {
+  console.info('JSON')
+  process.exit(0)
 }
 
-const handleInput = () => {
-  getFormat()
-  try {
-    if (fs.existsSync(outputFile)) {
-      fs.unlinkSync(outputFile)
-    }
+const printNormalizedSchema = (filePath: string) => {
+  const normalizedSchema = Schema.fromFile(filePath).getNormalizedSchema()
+  console.info(JSON.stringify(normalizedSchema, null, 2))
+  process.exit(0)
+}
 
+const outputGenerator = () => {
+  const schemaOrPath = arg0
+  const outputFile = arg1
+  try {
     if (!fs.existsSync(schemaOrPath)) {
       try {
         JSON.parse(schemaOrPath)
@@ -42,6 +45,9 @@ normalizedSchema.declarations.forEach(declaration => {
 module.exports = { normalizedSchema, molecules }
 `
     if (outputFile) {
+      if (fs.existsSync(outputFile)) {
+        fs.unlinkSync(outputFile)
+      }
       fs.writeFileSync(outputFile, script)
       console.info(`Generator is generated at ${outputFile} successfully`)
     } else {
@@ -53,7 +59,24 @@ module.exports = { normalizedSchema, molecules }
   }
 }
 
-if (!schemaOrPath) {
+const handleInput = () => {
+  switch (arg0) {
+    case '--format': {
+      printFormat()
+      break
+    }
+    case '-ns':
+    case '--normalize-schema': {
+      printNormalizedSchema(arg1)
+      break
+    }
+    default: {
+      outputGenerator()
+    }
+  }
+}
+
+if (!arg0) {
   let input = ''
   const rl = readline.createInterface({
     input: process.stdin,
@@ -63,9 +86,9 @@ if (!schemaOrPath) {
     input += line
   })
     .on('close', () => {
-      schemaOrPath = input
-      if (!schemaOrPath) {
-        console.error('Please use command as moleculec-javascript <schema | file path> [outputFile]')
+      arg0 = input
+      if (!arg0) {
+        console.error('Please use command as moleculec-javascript <schema | file path> [arg1]')
         process.exit(1)
       }
       handleInput()
