@@ -44,7 +44,11 @@
     "type": "git",
     "url": "git+https://github.com/Keith-CY/molecule-javascript.git"
   },
-  "keywords": [],
+  "keywords": [
+    "molecule",
+    "serialization",
+    "javascript"
+  ],
   "author": "",
   "license": "ISC",
   "bugs": {

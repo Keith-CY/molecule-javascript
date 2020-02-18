@@ -1,5 +1,7 @@
 # Molecule-JavaScript
 
+[![codecov](https://codecov.io/gh/Keith-CY/molecule-javascript/branch/master/graph/badge.svg)](https://codecov.io/gh/Keith-CY/molecule-javascript)
+
 ## Quick Start
 
 There's a [template project](https://github.com/keith-cy/molecule-javascript-template) for quick start to use `molecule-javascript`.
