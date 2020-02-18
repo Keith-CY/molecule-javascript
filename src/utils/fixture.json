@@ -35,6 +35,10 @@
       "expected": "0x78563412"
     },
     {
+      "source": "0x12345608",
+      "expected": "0x08563412"
+    },
+    {
       "source": 6,
       "exception": "Expect 6 to be a hex string"
     },
