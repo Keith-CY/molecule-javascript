@@ -5,8 +5,6 @@ import { serializeOption, deserializeOption } from './option'
 import { serializeTable, deserializeTable } from './table'
 import { serializeUnion, deserializeUnion } from './union'
 import { serializeStruct, deserializeStruct } from './struct'
-import { littleHexToInt } from './utils'
-import { HEADER_ELEMENT_SIZE } from './utils/const'
 import { normalizeStruct } from './struct/utils'
 
 const SCHEMA_HAS_INVALID_TYPE = 'Schema has invalid type'
@@ -110,6 +108,7 @@ class Molecule {
 
   public deserialize = (serialized: string) => {
     const deserialized = this.deserializeBasic(serialized)
+    if (deserialized === '0x' || deserialized === '') return deserialized
     return this.deserializeChildren(deserialized)
   }
 
@@ -214,7 +213,7 @@ class Molecule {
       case 'option':
         return deserializeOption(value)
       case 'union':
-        return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE))])
+        return deserializeUnion(value, this.schema.items.length)
       case 'struct':
         this.setSchema(normalizeStruct(this.schema))
         return deserializeStruct(
