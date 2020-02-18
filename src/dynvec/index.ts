@@ -32,9 +32,10 @@ export const serializeDynvec = (dynvec: HexString[]) => {
 }
 
 export const deserializeDynvec = (serialized: HexString) => {
+  if (serialized === '0x') throw new Error(`${serialized} is invalid serialized dynvec`)
   assertIsHexStr(serialized)
 
-  const fullSize = littleHexToInt(serialized.slice(0, HEADER_ELEMENT_SIZE))
+  const fullSize = littleHexToInt(serialized.slice(0, HEADER_ELEMENT_SIZE * 2))
 
   if (fullSize * 2 !== serialized.slice(2).length) {
     throw new Error(`The full size of ${serialized} is incorrect`)

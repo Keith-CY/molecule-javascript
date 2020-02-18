@@ -19,9 +19,9 @@ describe('Test deserialize table', () => {
 
   test.each(fixtureTable)(`%s => %s ? %s`, (source: any, expected: any, exception: any) => {
     if (exception) {
-      expect(() => deserializeUnion(source.serialized, source.indices)).toThrow(exception)
+      expect(() => deserializeUnion(source.serialized, source.itemLength)).toThrow(exception)
     } else {
-      const actual = deserializeUnion(source.serialized, source.indices)
+      const actual = deserializeUnion(source.serialized, source.itemLength)
       expect(actual).toEqual(expected)
     }
   })
