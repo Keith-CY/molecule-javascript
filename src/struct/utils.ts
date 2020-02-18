@@ -81,10 +81,11 @@ class StructUtils {
   }
 
   private findPair = (field: StructField): { alias: string; byteLength: number } => {
-    return this.aliasLengthPair.find(pair => pair.alias === field.alias) as {
-      alias: string
-      byteLength: number
+    const idx = this.aliasLengthPair.map(pair => pair.alias).indexOf(field.alias)
+    if (idx < 0) {
+      throw new Error(`Alias ${field.alias} is not found`)
     }
+    return this.aliasLengthPair[idx]
   }
 
   public assignByteLength = (field: StructField) => {
