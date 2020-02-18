@@ -110,6 +110,7 @@ class Molecule {
 
   public deserialize = (serialized: string) => {
     const deserialized = this.deserializeBasic(serialized)
+    if (deserialized === '0x' || deserialized === '') return deserialized
     return this.deserializeChildren(deserialized)
   }
 
@@ -214,7 +215,7 @@ class Molecule {
       case 'option':
         return deserializeOption(value)
       case 'union':
-        return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE))])
+        return deserializeUnion(value, [littleHexToInt(value.slice(0, HEADER_ELEMENT_SIZE * 2))])
       case 'struct':
         this.setSchema(normalizeStruct(this.schema))
         return deserializeStruct(
