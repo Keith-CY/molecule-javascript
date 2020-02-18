@@ -1,21 +1,15 @@
 {
   "serialize": [
     {
-      "source": [
-        [0, "0x"]
-      ],
+      "source": [[0, "0x"]],
       "expected": "0x00000000"
     },
     {
-      "source": [
-        [0, "0x030405060708"]
-      ],
+      "source": [[0, "0x030405060708"]],
       "expected": "0x00000000030405060708"
     },
     {
-      "source": [
-        [2, "0x060708"]
-      ],
+      "source": [[2, "0x060708"]],
       "expected": "0x02000000060708"
     },
     {
@@ -30,43 +24,30 @@
     {
       "source": {
         "serialized": "0x00000000",
-        "indices": [ 0 ]
+        "itemLength": 1
       },
-      "expected": [
-        [0, "0x"]
-      ]
-    }, 
+      "expected": [[0, "0x"]]
+    },
     {
       "source": {
         "serialized": "0x00000000030405060708",
-        "indices": [ 0 ]
+        "itemLength": 1
       },
-      "expected": [
-        [0, "0x030405060708"]
-      ]
+      "expected": [[0, "0x030405060708"]]
     },
     {
       "source": {
         "serialized": "0x02000000060708",
-        "indices": [ 2 ]
+        "itemLength": 3
       },
-      "expected": [
-        [2, "0x060708"]
-      ]
+      "expected": [[2, "0x060708"]]
     },
     {
       "source": {
-        "serialized": "0x02000000060708",
-        "indices": [ 2, 2 ]
+        "serialized": "0x03000000060708",
+        "itemLength": 2
       },
-      "exception": "Expect the count of union element to be 1"
-    },
-    {
-      "source": {
-        "serialized": "0x01000000060708",
-        "indices": [ 2 ]
-      },
-      "exception": "Expect serialized index to be equal to first indices element"
+      "exception": "Expect union serialized index must be smaller than item length"
     }
   ]
 }
