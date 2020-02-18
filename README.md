@@ -1,5 +1,7 @@
 # Molecule-JavaScript
 
+![npm](https://img.shields.io/npm/v/molecule-javascript)
+
 [![codecov](https://codecov.io/gh/Keith-CY/molecule-javascript/branch/master/graph/badge.svg)](https://codecov.io/gh/Keith-CY/molecule-javascript)
 
 ## Quick Start
@@ -13,7 +15,7 @@ It shows the most general way of using `molecule-javascript` in Browsers and Nod
 ### Use in Node.js
 
 ```js
-import Molecule from '@nervosnetwork/molecule-javascript'
+import Molecule from 'molecule-javascript'
 
 const normalizedSchema = {
   name: 'Bytes',
