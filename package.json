@@ -1,8 +1,9 @@
 {
   "name": "molecule-javascript",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "",
   "main": "./lib/index.js",
+  "browser": "./umd/index.js",
   "bin": {
     "moleculec-js": "./bin/cli.js"
   },

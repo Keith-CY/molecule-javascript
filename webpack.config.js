@@ -12,7 +12,7 @@ module.exports = {
       {
         test: /\.ts$/,
         use: 'ts-loader',
-        exclude: /node_modules/,
+        exclude: ['/node_modules/', '/src/cli.ts'],
       },
     ],
   },
@@ -21,7 +21,7 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'lib'),
+    path: path.resolve(__dirname, 'umd'),
     libraryTarget: 'umd',
     library: 'MoleculeJavaScript',
     globalObject: 'globalThis',
