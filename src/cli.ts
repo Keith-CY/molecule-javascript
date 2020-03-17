@@ -3,7 +3,7 @@
 import fs from 'fs'
 import readline from 'readline'
 
-const { Schema } = require('../lib/schema.js')
+const { Schema } = require('../lib/schema')
 
 const [, , ...args] = process.argv
 

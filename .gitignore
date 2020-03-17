@@ -83,6 +83,7 @@ typings/
 *.tsbuildinfo
 ./cache/*
 build
+umd
 
 # Optional npm cache directory
 .npm
