@@ -1,6 +1,6 @@
 {
   "name": "molecule-javascript",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "",
   "main": "./lib/index.js",
   "browser": "./umd/index.js",
@@ -10,7 +10,8 @@
   "files": [
     "types",
     "lib",
-    "bin"
+    "bin",
+    "umd"
   ],
   "dependencies": {},
   "devDependencies": {
